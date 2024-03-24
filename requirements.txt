@@ -1,0 +1,5 @@
+datetime
+os
+re
+tkcalendar==1.6.1
+tkinter
