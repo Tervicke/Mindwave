@@ -1,0 +1,9 @@
+{
+    "Background_color": "#212121",
+    "Editor_color": "#333333",
+    "Foreground_color": "white",
+    "Theme_color": "#9ecae1",
+    "Text_color": "white",
+    "Diary_folder": "journals",
+    "Template": "src/default_template.md"
+}
