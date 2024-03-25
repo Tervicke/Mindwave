@@ -6,7 +6,6 @@ def load_settings():
     global Settings
     with open('src/settings.json', 'r') as file:
         Settings = json.load(file)
-    print(Settings)
 
 def update_settings(setting_key,setting_value):
     global Settings

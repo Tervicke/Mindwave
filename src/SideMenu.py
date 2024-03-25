@@ -24,12 +24,8 @@ class Sidemenu(tk.Frame):
         self.calendar.config(normalforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(weekendbackground=app_settings.Settings['Background_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
-        self.calendar.config(othermonthforeground=app_settings.Settings['Foreground_color'])
-        self.calendar.config(othermonthbackground=app_settings.Settings['Background_color'])
-        self.calendar.config(othermonthweforeground=app_settings.Settings['Foreground_color'])
-        self.calendar.config(othermonthwebackground=app_settings.Settings['Background_color'])
         self.calendar.config(selectbackground=app_settings.Settings['Theme_color'])
-        self.calendar.config(selectforeground=app_settings.Settings['Editor_color'])
+        self.calendar.config(selectforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(showweeknumbers=False)
         self.calendar.config(showothermonthdays=False)
@@ -44,3 +40,6 @@ class Sidemenu(tk.Frame):
     def date_selected(self,event=None):
         if self.editor_widget:
             self.editor_widget.open_date(self.calendar.get_date())
+    def change_calendar_theme(self,updated_color):
+        self.calendar.config(selectbackground=updated_color)
+
