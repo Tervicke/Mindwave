@@ -1,5 +1,5 @@
 import tkinter as tk
-from app_settings import Settings
+import app_settings
 from EditorWidget import Editorwidget
 from SideMenu import Sidemenu
 from MenuBar import Menubar
@@ -7,7 +7,8 @@ class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.configure(bg=Settings['Background_color'])  
+        app_settings.load_settings()
+        self.configure(bg=app_settings.Settings['Background_color'])  
         self.title('Mindwave')
         self.geometry('1000x620')
         self.iconphoto(False, tk.PhotoImage(file='icons/app_icon.png'))

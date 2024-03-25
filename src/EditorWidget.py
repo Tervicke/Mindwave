@@ -1,6 +1,6 @@
 import tkinter as tk 
 from tkinter import *
-from app_settings import Settings , App_font 
+import app_settings
 from datetime import datetime
 from tkinter import *
 import re
@@ -10,21 +10,21 @@ class Editorwidget(tk.Text):
         super().__init__(master ,**kw) 
 
         #general configs
-        self.config(bg=Settings['Editor_color'])
-        self.config(fg=Settings['Text_color'])
+        self.config(bg=app_settings.Settings['Editor_color'])
+        self.config(fg=app_settings.Settings['Text_color'])
         self.config(width=40)
         self.config(height=10)
         self.config(highlightthickness=1)
         self.config(insertwidth=2)
-        self.config(font=App_font)
+        self.config(font=app_settings.App_font)
         self.config(padx=10)
         self.config(pady=10)
         self.config(wrap=WORD)
         self.config(highlightbackground="black")
-        self.config(insertbackground=Settings['Text_color'])
+        self.config(insertbackground=app_settings.Settings['Text_color'])
 
-        self.tag_configure("bold", font=(App_font + ("bold",)))
-        self.tag_configure("italic", font=(App_font + ("italic",)))
+        self.tag_configure("bold", font=(app_settings.App_font + ("bold",)))
+        self.tag_configure("italic", font=(app_settings.App_font + ("italic",)))
         self.tag_configure("underline", underline=True)
 
         #keyboard bindings 
@@ -125,7 +125,7 @@ class Editorwidget(tk.Text):
     def open_todays(self,event=None):
         #set date today's date
         #cal.selection_set(datetime.today().date())
-        today_date_file = Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".md"
+        today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".md"
         self.configure(state='normal')
         self.delete('1.0', 'end')
         self.focus_set()
@@ -216,14 +216,14 @@ class Editorwidget(tk.Text):
             
             start_index = end_index
         
-        today_date_file = Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".md"
+        today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".md"
         with open(today_date_file, "w") as file:
             file.write(markdown_content) 
         self.config(state='disabled')
 
     def open_date(self,date):
 
-        file_name = Settings['Diary_folder']+'/' + date.replace('/','-') + '.md'
+        file_name = app_settings.Settings['Diary_folder']+'/' + date.replace('/','-') + '.md'
 
         self.configure(state='normal')
         self.delete('1.0', 'end')
@@ -247,6 +247,6 @@ class Editorwidget(tk.Text):
                 self.config(state='disabled')
 
     def set_template(self):
-        with open(Settings['Template']) as Diary_File:
+        with open(app_settings.Settings['Template']) as Diary_File:
             self.apply_formatting(Diary_File.read())
 

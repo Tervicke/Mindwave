@@ -1,11 +1,17 @@
+import json
 App_font = ("Arial" , 15)
-Settings= {
-    "Background_color": "#212121",
-    "Editor_color":"#333333",
-    "Foreground_color": "white",
-    "Theme_color":"#9ecae1",
-    #"Theme_color":"#42f5ad",
-    "Text_color":"white",
-    "Diary_folder":'journals',
-    "Template":"src/default_template.md"
-}
+Settings= {None}
+
+def load_settings():
+    global Settings
+    with open('src/settings.json', 'r') as file:
+        Settings = json.load(file)
+    print(Settings)
+
+def update_settings(setting_key,setting_value):
+    global Settings
+    if setting_key in Settings:
+        Settings[setting_key] = setting_value
+        with open("src/settings.json", 'w') as file:
+            json.dump(Settings,file,indent=4)
+
