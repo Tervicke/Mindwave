@@ -30,6 +30,16 @@ class MainWindow(tk.Tk):
         self.side_menu.set_editor_widget(self.editor_widget)
         self.setting_panel.set_side_menu(self.side_menu)
 
+    def change_themes(self,theme):
+        app_settings.load_settings()
+        self.reload()
+        self.editor_widget.reload()
+        self.menu_bar.reload()
+        self.side_menu.reload()
+        self.setting_panel.reload()
+
+    def reload(self):
+        self.configure(bg=app_settings.Settings['Background_color'])  
 if __name__ == "__main__":
     app = MainWindow()
     app.mainloop()

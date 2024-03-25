@@ -11,6 +11,7 @@ def load_settings():
         temp = json.load(file)
 
         # Adding key-value pairs
+        Settings["Theme"] = temp['Theme']
         Settings["Theme_color"] = temp['Theme_color']
         Settings["Diary_folder"] = temp['Diary_folder']
         Settings["Template"] = temp['Template']

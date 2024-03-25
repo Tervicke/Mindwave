@@ -249,4 +249,8 @@ class Editorwidget(tk.Text):
     def set_template(self):
         with open(app_settings.Settings['Template']) as Diary_File:
             self.apply_formatting(Diary_File.read())
-
+    def reload(self):
+        self.config(bg=app_settings.Settings['Editor_color'])
+        self.config(fg=app_settings.Settings['Text_color'])
+        self.config(highlightbackground="black")
+        self.config(insertbackground=app_settings.Settings['Text_color'])

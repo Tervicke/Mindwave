@@ -42,4 +42,17 @@ class Sidemenu(tk.Frame):
             self.editor_widget.open_date(self.calendar.get_date())
     def change_calendar_theme(self,updated_color):
         self.calendar.config(selectbackground=updated_color)
-
+    def reload(self):
+        self.configure(bg=app_settings.Settings['Background_color'])
+        self.calendar.config(foreground=app_settings.Settings['Foreground_color'])
+        self.calendar.config(background=app_settings.Settings['Editor_color'])
+        self.calendar.config(bordercolor=app_settings.Settings['Background_color'])
+        self.calendar.config(headersbackground=app_settings.Settings['Background_color'])
+        self.calendar.config(headersforeground=app_settings.Settings['Foreground_color'])
+        self.calendar.config(normalbackground=app_settings.Settings['Background_color'])
+        self.calendar.config(normalforeground=app_settings.Settings['Foreground_color'])
+        self.calendar.config(weekendbackground=app_settings.Settings['Background_color'])
+        self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
+        self.calendar.config(selectbackground=app_settings.Settings['Theme_color'])
+        self.calendar.config(selectforeground=app_settings.Settings['Editor_color'])
+        self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])

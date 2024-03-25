@@ -46,4 +46,14 @@ class Menubar(tk.Frame):
     def open_todays(self):
         if self.editor_widget:
             self.editor_widget.open_todays()
+    def reload(self):
+        self.configure(bg=app_settings.Settings['Background_color'])
+        self.edit_todays.config(bg=app_settings.Settings['Background_color'])
+        self.edit_todays.config(highlightbackground=app_settings.Settings['Background_color'])
+        self.edit_todays.config(activebackground=app_settings.Settings['Background_color'])
+
+    
+        self.save_todays.config(bg=app_settings.Settings['Background_color'])
+        self.save_todays.config(highlightbackground=app_settings.Settings['Background_color'])
+        self.save_todays.config(activebackground=app_settings.Settings['Background_color'])
 
