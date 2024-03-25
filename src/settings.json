@@ -1,9 +1,14 @@
 {
-    "Background_color": "#212121",
-    "Editor_color": "#333333",
-    "Foreground_color": "white",
-    "Theme_color": "Blue",
-    "Text_color": "white",
+    "Theme": "Dark",
+    "Light_Background_color": "#EDEDED",
+    "Light_Editor_color": "#FFFFFF",
+    "Light_Foreground_color": "#1D1D1F",
+    "Light_Text_color": "#1D1D1F",
+    "Dark_Background_color": "#212121",
+    "Dark_Editor_color": "#333333",
+    "Dark_Foreground_color": "white",
+    "Dark_Text_color": "white",
+    "Theme_color": "#007AFF",
     "Diary_folder": "journals",
     "Template": "src/default_template.md"
 }

@@ -11,7 +11,7 @@ class MainWindow(tk.Tk):
         app_settings.load_settings()
         self.configure(bg=app_settings.Settings['Background_color'])  
         self.title('Mindwave')
-        self.geometry('1000x620')
+        self.geometry('900x620')
         self.iconphoto(False, tk.PhotoImage(file='icons/app_icon.png'))
 
         #Editing window
@@ -22,7 +22,7 @@ class MainWindow(tk.Tk):
         self.editor_widget.set_template()
         #placing the widgets 
         self.menu_bar.pack(fill='x',side='top',padx=10)
-        self.editor_widget.pack(fill="both",expand=True , side="left",padx=10)
+        self.editor_widget.pack(fill="both",expand=True , side="left",padx=10,pady=10)
         self.side_menu.pack(fill="both",expand=True,padx=10)            
 
         #pass the objects menu

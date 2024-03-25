@@ -25,7 +25,7 @@ class Sidemenu(tk.Frame):
         self.calendar.config(weekendbackground=app_settings.Settings['Background_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(selectbackground=app_settings.Settings['Theme_color'])
-        self.calendar.config(selectforeground=app_settings.Settings['Foreground_color'])
+        self.calendar.config(selectforeground=app_settings.Settings['Editor_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(showweeknumbers=False)
         self.calendar.config(showothermonthdays=False)
