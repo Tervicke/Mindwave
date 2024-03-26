@@ -27,6 +27,7 @@ class MainWindow(tk.Tk):
 
         #pass the objects menu
         self.menu_bar.set_editor_widget(self.editor_widget)
+        self.menu_bar.set_settings_panel(self.setting_panel)
         self.side_menu.set_editor_widget(self.editor_widget)
         self.setting_panel.set_side_menu(self.side_menu)
 
