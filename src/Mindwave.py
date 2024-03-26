@@ -20,6 +20,10 @@ class MainWindow(tk.Tk):
         self.menu_bar = Menubar(self,)
         self.setting_panel = Settingspanel(self)
         self.editor_widget.set_template()
+        self.editor_widget.save_todays()
+        self.editor_widget.config(state='normal')
+        self.editor_widget.focus_set()
+
         #placing the widgets 
         self.menu_bar.pack(fill='x',side='top',padx=10)
         self.editor_widget.pack(fill="both",expand=True , side="left",padx=10,pady=10)
