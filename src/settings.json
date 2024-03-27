@@ -8,7 +8,7 @@
     "Dark_Editor_color": "#333333",
     "Dark_Foreground_color": "white",
     "Dark_Text_color": "white",
-    "Theme_color": "#34c759",
+    "Theme_color": "#007AFF",
     "Diary_folder": "journals",
     "Template": "src/default_template.md"
 }

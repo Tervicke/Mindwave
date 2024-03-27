@@ -26,6 +26,9 @@ class Settingspanel(tk.Toplevel):
         self.setup_accent_color()
         self.setup_theme_chooser()
         self.setup_save_button()
+
+        self.center_window_on_screen(self)
+
     def setup_accent_color(self):
 
         self.accent_label = tk.Label(self, font=app_settings.App_font,text="Accent color:", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
@@ -138,3 +141,18 @@ class Settingspanel(tk.Toplevel):
         self.deiconify()
     def close_settings(self):
         self.withdraw()
+    def center_window_on_screen(self,window):
+        window.update_idletasks()  # Ensure window size is updated
+        window_width = window.winfo_width()
+        window_height = window.winfo_height()
+
+        # Get the screen width and height
+        screen_width = window.winfo_screenwidth()
+        screen_height = window.winfo_screenheight()
+
+        # Calculate the position of the window
+        x = (screen_width - window_width) // 2
+        y = (screen_height - window_height) // 2
+
+        # Set the window position
+        window.geometry('+{}+{}'.format(x, y))

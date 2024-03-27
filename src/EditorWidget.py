@@ -134,8 +134,11 @@ class Editorwidget(tk.Text):
                 self.apply_formatting(Today_file.read())
         except FileNotFoundError:
             with open(today_date_file, 'w'):
-                pass  # Creating the file
-
+                self.set_template()
+                self.save_todays()
+                self.config(state='normal')
+                self.focus_set()
+                
     def apply_formatting(self,md_content):
         bold = italic = underline = False
         formatted_text = ""
@@ -171,6 +174,7 @@ class Editorwidget(tk.Text):
                 self.insert(tk.END, md_content[i])
 
             i += 1
+
     def save_todays(self,Event=None):
         if self.cget('state')=="disabled":
             return 
