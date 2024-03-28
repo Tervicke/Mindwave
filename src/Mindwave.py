@@ -12,7 +12,7 @@ class MainWindow(tk.Tk):
         app_settings.load_settings()
         self.configure(bg=app_settings.Settings['Background_color'])  
         self.title('Mindwave')
-        self.geometry('980x620')
+        self.geometry('1000x620')
         self.iconphoto(False, tk.PhotoImage(file='icons/app_icon.png'))
 
         #Editing window
