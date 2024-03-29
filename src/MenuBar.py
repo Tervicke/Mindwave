@@ -28,6 +28,11 @@ class Menubar(tk.Frame):
         self.settings_button= tk.Button(self ,image=self.settings_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.open_settings)
         self.settings_button.pack(side='right',padx=2,pady=10)
 
+        self.reset_icon = tk.PhotoImage(file="icons/reset.png")
+        self.reset_prompt_button = tk.Button(self ,image=self.reset_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.reset_prompt)
+        self.reset_prompt_button.pack(side='left',padx=2,pady=10)
+
+
     def setup_label(self):
         self.Datelabel.config(bg=app_settings.Settings['Background_color'])
         self.Datelabel.config(fg=app_settings.Settings['Theme_color'])
@@ -72,3 +77,7 @@ class Menubar(tk.Frame):
         if self.settings_panel:
             print(self.settings_panel)
             self.settings_panel.open_setings()
+
+    def reset_prompt(self):
+        if self.editor_widget:
+            self.editor_widget.set_prompt()

@@ -139,7 +139,7 @@ class Editorwidget(tk.Text):
                 self.apply_formatting(Today_file.read())
         except FileNotFoundError:
             with open(today_date_file, 'w'):
-                self.set_template()
+                self.set_prompt()
                 self.save_todays()
                 self.config(state='normal')
                 self.focus_set()
@@ -248,19 +248,23 @@ class Editorwidget(tk.Text):
         else:
             if date == datetime.now().strftime("%d/%m/%y"):
                 self.configure(state='normal')
-                self.set_tempate()
+                self.set_prompt()
                 self.focus_set()
             else:
                 self.configure(state='normal')
                 self.insert('4.6',"No Entry found..")
                 self.config(state='disabled')
 
-    def set_template(self):
+    def set_prompt(self):
+        self.configure(state="normal")
+        self.delete('1.0','end')
         temp = generate_prompt()
         self.insert('1.0','• ' + temp['question_text']+'\n')
         #with open(app_settings.Settings['Template']) as Diary_File:
         #    self.apply_formatting(Diary_File.read())
         self.save_todays()
+        self.focus_set()
+        self.configure(state='normal')
     def reload(self):
         self.config(bg=app_settings.Settings['Editor_color'])
         self.config(fg=app_settings.Settings['Text_color'])
