@@ -14,6 +14,9 @@ def get_current_time_formatted():
 prompt_template=f'''
 Give me 1 open ended question that i can ask my friend that will help him reflect on himself at [time] give it to me in json format with 2 keys called question_type and question_text
 '''
+prompt=f'''
+give me journal format for today
+'''
 load_dotenv()
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 genai.configure(api_key=GOOGLE_API_KEY)
@@ -42,3 +45,4 @@ def generate_prompt(retries = 3):
     except json.JSONDecodeError as e:
         print(f'Error decoding json')
         return generate_prompt(retries-1)
+print(model.generate_content(prompt))
