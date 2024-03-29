@@ -5,6 +5,7 @@ from datetime import datetime
 from tkinter import *
 import re
 import os
+from PromptGenerator import generate_prompt
 class Editorwidget(tk.Text):
     def __init__(self, master=None,**kw):
         super().__init__(master ,**kw) 
@@ -26,12 +27,16 @@ class Editorwidget(tk.Text):
         self.tag_configure("bold", font=(app_settings.App_font + ("bold",)))
         self.tag_configure("italic", font=(app_settings.App_font + ("italic",)))
         self.tag_configure("underline", underline=True)
+        self.tag_configure("red",foreground="#007AFF")
+        self.tag_configure("blue",foreground="#34C579")
+        self.tag_configure("green",foreground="red")
 
         #keyboard bindings 
         self.bind('<Control-a>', self.select_all_text)
         self.bind("<Control-b>", self.toggle_bold)
         self.bind("<Control-i>", self.toggle_italic)
         self.bind("<Control-u>", self.toggle_underline)
+        self.bind("<Control-r>", self.change_selected_text_color)
 
         self.bind("<Control-s>", self.save_todays)
         self.bind("<Control-o>", self.open_todays)
@@ -251,10 +256,26 @@ class Editorwidget(tk.Text):
                 self.config(state='disabled')
 
     def set_template(self):
-        with open(app_settings.Settings['Template']) as Diary_File:
-            self.apply_formatting(Diary_File.read())
+        temp = generate_prompt()
+        self.insert('1.0','• ' + temp['question_text']+'\n')
+        #with open(app_settings.Settings['Template']) as Diary_File:
+        #    self.apply_formatting(Diary_File.read())
+        self.save_todays()
     def reload(self):
         self.config(bg=app_settings.Settings['Editor_color'])
         self.config(fg=app_settings.Settings['Text_color'])
         self.config(highlightbackground="black")
         self.config(insertbackground=app_settings.Settings['Text_color'])
+    def change_selected_text_color(self,event=None):
+            start_index = self.index(tk.SEL_FIRST)
+            end_index = self.index(tk.SEL_LAST)
+            self.tag_configure("color_change", foreground=app_settings.Settings['Theme_color'])
+            self.tag_add("color_change", start_index, end_index)
+            #self.tag_configure("color_change", foreground="#007AFF")
+
+    def get_keys_by_value(self,value):
+        keys = []
+        for key, val in self.colors.items():
+            if val == value:
+                keys.append(key)
+        return keys if keys else None

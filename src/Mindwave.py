@@ -8,7 +8,7 @@ from SettingsPanel import Settingspanel
 class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
-
+        self.withdraw()
         app_settings.load_settings()
         self.configure(bg=app_settings.Settings['Background_color'])  
         self.title('Mindwave')
@@ -33,7 +33,7 @@ class MainWindow(tk.Tk):
         self.menu_bar.set_settings_panel(self.setting_panel)
         self.side_menu.set_editor_widget(self.editor_widget)
         self.setting_panel.set_side_menu(self.side_menu)
-
+        self.deiconify()
     def change_themes(self,theme):
         app_settings.load_settings()
         self.reload()
