@@ -1,5 +1,5 @@
 import json
-App_font = ("Arial" , 15)
+App_font = ("Helvetica" , 15)
 Settings= {  }
 #color for blue -> 007AFF
 #color for green -> 34C759
