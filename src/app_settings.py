@@ -20,11 +20,14 @@ def load_settings():
         # Dynamic update
         Settings["Background_color"] = temp[f"{theme}_Background_color"]
         Settings["Foreground_color"] = temp[f"{theme}_Foreground_color"]
-        Settings["Editor_color"] = temp[f"{theme}_Editor_color"]
         Settings["Text_color"] = temp[f"{theme}_Text_color"]
+        Settings['Editor_foreground']=temp[f"{theme}_Editor_foreground"]
+        Settings['Editor_background']=temp[f"{theme}_Editor_background"]
+        Settings['Editor_insertbg']=temp[f"{theme}_Editor_insertbg"]
 
-        
-    
+        Settings['Editor_selectbackground']=temp[f"{theme}_Editor_selectbackground"]
+        Settings['Editor_highlightbackground']=temp[f"{theme}_Editor_hightlightbackground"]
+
 def update_settings(setting_key,setting_value):
     global Settings
     with open('src/settings.json', 'r') as file:

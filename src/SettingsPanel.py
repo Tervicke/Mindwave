@@ -52,12 +52,12 @@ class Settingspanel(tk.Toplevel):
     def setup_save_button(self):
         self.save_button = tk.Button(self, text="save", command=self.apply_changes, bd=1)
         self.save_button.config(relief="solid")
-        self.save_button.config(bg=app_settings.Settings['Editor_color'])
-        self.save_button.config(fg=app_settings.Settings['Foreground_color'])
+        self.save_button.config(bg=app_settings.Settings['Theme_color'])
+        self.save_button.config(fg="white")
         self.save_button.config(font=app_settings.App_font)
         self.save_button.config(highlightbackground=app_settings.Settings['Background_color'])
-        self.save_button.config(activebackground=app_settings.Settings['Editor_color'])
-        self.save_button.config(activeforeground=app_settings.Settings['Foreground_color'])
+        self.save_button.config(activebackground=app_settings.Settings['Theme_color'])
+        self.save_button.config(activeforeground="white")
         self.save_button.grid(row=2, column=1)
 
 
@@ -117,12 +117,10 @@ class Settingspanel(tk.Toplevel):
     def reload(self):
         self.config(bg=app_settings.Settings['Background_color'])
         
-        self.save_button.config(bg=app_settings.Settings['Editor_color'],
-                                 fg=app_settings.Settings['Foreground_color'],
+        self.save_button.config(bg=app_settings.Settings['Theme_color'],
                                  highlightbackground=app_settings.Settings['Background_color'],
-                                 activebackground=app_settings.Settings['Editor_color'],
-                                 activeforeground=app_settings.Settings['Foreground_color'])
-        
+                                 activebackground=app_settings.Settings['Theme_color'])
+                 
         self.accent_label.config(bg=app_settings.Settings['Background_color'],
                                   fg=app_settings.Settings['Foreground_color'])
         

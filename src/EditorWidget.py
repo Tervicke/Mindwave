@@ -10,7 +10,7 @@ class Editorwidget(tk.Text):
         super().__init__(master ,**kw) 
 
         #general configs
-        self.config(bg=app_settings.Settings['Editor_color'])
+        self.config(bg=app_settings.Settings['Theme_color'])
         self.config(fg=app_settings.Settings['Text_color'])
         self.config(width=40)
         self.config(height=10)
@@ -22,6 +22,14 @@ class Editorwidget(tk.Text):
         self.config(wrap=WORD)
         self.config(highlightbackground="black")
         self.config(insertbackground=app_settings.Settings['Text_color'])
+
+        self.config(
+        fg=app_settings.Settings['Editor_foreground'],          
+        bg=app_settings.Settings['Editor_background'],          
+        insertbackground=app_settings.Settings['Editor_insertbg'], 
+        selectbackground=app_settings.Settings['Editor_selectbackground'],
+        highlightbackground=app_settings.Settings['Editor_highlightbackground'],
+        )
 
         self.tag_configure("bold", font=(app_settings.App_font + ("bold",)))
         self.tag_configure("italic", font=(app_settings.App_font + ("italic",)))
@@ -258,10 +266,12 @@ class Editorwidget(tk.Text):
         with open('templates/'+ app_settings.Settings['Template'], 'r') as Template:
                 self.apply_formatting(Template.read())
     def reload(self):
-        self.config(bg=app_settings.Settings['Editor_color'])
-        self.config(fg=app_settings.Settings['Text_color'])
-        self.config(highlightbackground="black")
+        self.config(bg=app_settings.Settings['Editor_background'])
+        self.config(fg=app_settings.Settings['Editor_foreground'])
         self.config(insertbackground=app_settings.Settings['Text_color'])
+        self.config(insertbackground=app_settings.Settings['Editor_insertbg'])
+        self.config(selectbackground=app_settings.Settings['Editor_selectbackground'])
+        self.config(highlightbackground=app_settings.Settings['Editor_highlightbackground'])
     def change_selected_text_color(self,event=None):
             start_index = self.index(tk.SEL_FIRST)
             end_index = self.index(tk.SEL_LAST)

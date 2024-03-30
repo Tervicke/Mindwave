@@ -16,7 +16,7 @@ class Sidemenu(tk.Frame):
     def setup_calendar(self):
         self.calendar.config(selectmode='day')
         self.calendar.config(foreground=app_settings.Settings['Foreground_color'])
-        self.calendar.config(background=app_settings.Settings['Editor_color'])
+        self.calendar.config(background=app_settings.Settings['Text_color'])
         self.calendar.config(bordercolor=app_settings.Settings['Background_color'])
         self.calendar.config(headersbackground=app_settings.Settings['Background_color'])
         self.calendar.config(headersforeground=app_settings.Settings['Foreground_color'])
@@ -25,7 +25,7 @@ class Sidemenu(tk.Frame):
         self.calendar.config(weekendbackground=app_settings.Settings['Background_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(selectbackground=app_settings.Settings['Theme_color'])
-        self.calendar.config(selectforeground=app_settings.Settings['Editor_color'])
+        self.calendar.config(selectforeground="white")
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(showweeknumbers=False)
         self.calendar.config(showothermonthdays=False)
@@ -45,7 +45,7 @@ class Sidemenu(tk.Frame):
     def reload(self):
         self.configure(bg=app_settings.Settings['Background_color'])
         self.calendar.config(foreground=app_settings.Settings['Foreground_color'])
-        self.calendar.config(background=app_settings.Settings['Editor_color'])
+        self.calendar.config(background=app_settings.Settings['Text_color'])
         self.calendar.config(bordercolor=app_settings.Settings['Background_color'])
         self.calendar.config(headersbackground=app_settings.Settings['Background_color'])
         self.calendar.config(headersforeground=app_settings.Settings['Foreground_color'])
@@ -54,5 +54,4 @@ class Sidemenu(tk.Frame):
         self.calendar.config(weekendbackground=app_settings.Settings['Background_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(selectbackground=app_settings.Settings['Theme_color'])
-        self.calendar.config(selectforeground=app_settings.Settings['Editor_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
