@@ -63,18 +63,22 @@ class Settingspanel(tk.Toplevel):
 
     def apply_changes(self):
         if not self.accent_color_combobox.get() == app_settings.Settings['Theme_color']:
-            self.change_calendar_theme()
+            update_color = self.accent_color_combobox.get()
+            self.change_calendar_theme(update_color)
+            self.change_save_buton_bg(update_color)
         if not self.theme_combobox.get() == app_settings.Settings['Theme']:
             self.change_theme()
-            
+
+    def change_save_buton_bg(self,update_color):
+        self.save_button.config(bg=self.colors[update_color])
+        self.save_button.config(activebackground=self.colors[update_color])
     def set_side_menu(self,side_menu):
         self.side_menu= side_menu 
 
-    def change_calendar_theme(self):
+    def change_calendar_theme(self,update_color):
         if self.side_menu:
-            update_color = self.accent_color_combobox.get()
-            self.side_menu.change_calendar_theme(self.colors[update_color])
             app_settings.update_settings("Theme_color",self.colors[update_color])
+            self.side_menu.change_calendar_theme(self.colors[update_color])
         
 
     def get_keys_by_value(self,value):
