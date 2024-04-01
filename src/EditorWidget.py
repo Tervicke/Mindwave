@@ -263,7 +263,7 @@ class Editorwidget(tk.Text):
                 self.config(state='disabled')
 
     def set_template(self):
-        with open('templates/'+ app_settings.Settings['Template'], 'r') as Template:
+        with open('templates/'+ app_settings.Settings['Template'] + '.md', 'r') as Template:
                 self.apply_formatting(Template.read())
     def reload(self):
         self.config(bg=app_settings.Settings['Editor_background'])

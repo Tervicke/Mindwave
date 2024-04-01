@@ -1,6 +1,8 @@
 import app_settings
 import tkinter as tk
 from tkinter import ttk
+import os 
+import glob
 class Settingspanel(tk.Toplevel):
     def __init__(self,master=None, **kw):
         super().__init__(master, **kw)
@@ -26,7 +28,7 @@ class Settingspanel(tk.Toplevel):
         self.setup_accent_color()
         self.setup_theme_chooser()
         self.setup_save_button()
-
+        self.setup_template_chooser()
         self.center_window_on_screen(self)
 
     def setup_accent_color(self):
@@ -58,7 +60,7 @@ class Settingspanel(tk.Toplevel):
         self.save_button.config(highlightbackground=app_settings.Settings['Background_color'])
         self.save_button.config(activebackground=app_settings.Settings['Theme_color'])
         self.save_button.config(activeforeground="white")
-        self.save_button.grid(row=2, column=1)
+        self.save_button.grid(row=4, column=1)
 
 
     def apply_changes(self):
@@ -113,6 +115,36 @@ class Settingspanel(tk.Toplevel):
         self.theme_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])
 
         #-------------------------------------------------------
+    def setup_template_chooser(self):
+
+        self.template_label = tk.Label(self, font=app_settings.App_font,text="Template", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
+        self.template_label.grid(row=2,column=0,pady=5,padx=5)
+
+        self.template_combobox = ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Foreground_color'],font=app_settings.App_font,style="Custom.TCombobox")
+        self.template_combobox.grid(row=2, column=1,padx=5,pady=5)
+
+        # Construct the pattern to match all '.md' files
+        template = "templates"
+        pattern = f"{template}/*.md"
+
+        # List all files in the directory with .md extension
+        md_files = glob.glob(pattern)
+
+        # Remove the '.md' extension and keep only the base names
+        md_filenames = [os.path.splitext(os.path.basename(file))[0] for file in md_files]
+
+        # Update self.template_combox['values'] with these filenames
+        print(md_filenames)
+        self.template_combobox['values'] = md_filenames 
+        # Set a default value by getting the color
+        self.template_combobox.set(app_settings.Settings['Template'])
+
+        self.style.map('Custom.TCombobox', fieldbackground=[('readonly',app_settings.Settings['Background_color'])])
+        self.style.map('Custom.TCombobox', background=[('readonly', app_settings.Settings['Background_color'])])
+        self.style.map('Custom.TCombobox', foreground=[('readonly', app_settings.Settings['Foreground_color'])])
+        self.accent_color_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
+        self.template_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
+        self.template_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])
 
     def change_theme(self):
         app_settings.update_settings("Theme",self.theme_combobox.get())
