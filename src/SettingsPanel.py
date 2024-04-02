@@ -70,7 +70,8 @@ class Settingspanel(tk.Toplevel):
             self.change_save_buton_bg(update_color)
         if not self.theme_combobox.get() == app_settings.Settings['Theme']:
             self.change_theme()
-
+        if not self.template_combobox.get() == app_settings.Settings['Template']:
+            app_settings.update_settings('Template',self.template_combobox.get())
     def change_save_buton_bg(self,update_color):
         self.save_button.config(bg=self.colors[update_color])
         self.save_button.config(activebackground=self.colors[update_color])
@@ -142,7 +143,7 @@ class Settingspanel(tk.Toplevel):
         self.style.map('Custom.TCombobox', fieldbackground=[('readonly',app_settings.Settings['Background_color'])])
         self.style.map('Custom.TCombobox', background=[('readonly', app_settings.Settings['Background_color'])])
         self.style.map('Custom.TCombobox', foreground=[('readonly', app_settings.Settings['Foreground_color'])])
-        self.accent_color_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
+        self.template_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
         self.template_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
         self.template_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])
 
@@ -163,6 +164,9 @@ class Settingspanel(tk.Toplevel):
         self.theme_label.config(bg=app_settings.Settings['Background_color'],
                                 fg=app_settings.Settings['Foreground_color'])
         
+        self.template_label.config(bg=app_settings.Settings['Background_color'],
+                                fg=app_settings.Settings['Foreground_color'])
+
         # Update combobox dropdown list styles for both accent and theme comboboxes
         self.style.map('Custom.TCombobox', fieldbackground=[('readonly', app_settings.Settings['Background_color'])])
         self.accent_color_combobox.configure(foreground=app_settings.Settings['Foreground_color'])
@@ -171,6 +175,11 @@ class Settingspanel(tk.Toplevel):
         self.accent_color_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
         self.accent_color_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
         self.accent_color_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])
+
+        self.template_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
+        self.template_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
+        self.template_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])
+        self.template_combobox.configure(foreground=app_settings.Settings['Foreground_color'])
     def open_setings(self):
         self.deiconify()
     def close_settings(self):
