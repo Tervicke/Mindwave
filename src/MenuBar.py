@@ -16,15 +16,15 @@ class Menubar(tk.Frame):
         self.Datelabel = tk.Label(self) 
         #self.setup_label()
         
-        self.edit_icon= tk.PhotoImage(file="icons/edit_blue.png")
+        self.edit_icon= tk.PhotoImage(file="icons/edit_green.png")
         self.edit_todays = tk.Button(self ,image=self.edit_icon ,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.open_todays)
         self.edit_todays.pack(side='left',padx=0,pady=10)
 
-        self.save_icon= tk.PhotoImage(file="icons/save_blue.png")
+        self.save_icon= tk.PhotoImage(file="icons/save_green.png")
         self.save_todays= tk.Button(self ,image=self.save_icon ,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.save_todays)
         self.save_todays.pack(side='left',padx=2,pady=10)
 
-        self.settings_icon= tk.PhotoImage(file="icons/settings_blue.png")
+        self.settings_icon= tk.PhotoImage(file="icons/settings_green.png")
         self.settings_button= tk.Button(self ,image=self.settings_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.open_settings)
         self.settings_button.pack(side='right',padx=2,pady=10)
 
