@@ -145,9 +145,7 @@ class Editorwidget(tk.Text):
             with open(today_date_file, 'r') as Today_file:
                 self.apply_formatting(Today_file.read())
         except FileNotFoundError:
-            with open(today_date_file, 'w'):
                 self.set_template()
-                self.save_todays()
                 self.config(state='normal')
                 self.focus_set()
                 
@@ -263,7 +261,9 @@ class Editorwidget(tk.Text):
                 self.config(state='disabled')
 
     def set_template(self):
-        with open('templates/'+ app_settings.Settings['Template'] + '.md', 'r') as Template:
+        print(app_settings.Settings['Template'])
+        if not app_settings.Settings['Template'] == "None":
+            with open('templates/'+ app_settings.Settings['Template'] + '.md', 'r') as Template:
                 self.apply_formatting(Template.read())
     def reload(self):
         self.config(bg=app_settings.Settings['Editor_background'])

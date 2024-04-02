@@ -134,7 +134,7 @@ class Settingspanel(tk.Toplevel):
         md_filenames = [os.path.splitext(os.path.basename(file))[0] for file in md_files]
 
         # Update self.template_combox['values'] with these filenames
-        print(md_filenames)
+        md_filenames.append("None")
         self.template_combobox['values'] = md_filenames 
         # Set a default value by getting the color
         self.template_combobox.set(app_settings.Settings['Template'])

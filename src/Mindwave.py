@@ -34,6 +34,7 @@ class MainWindow(tk.Tk):
         self.side_menu.set_editor_widget(self.editor_widget)
         self.setting_panel.set_side_menu(self.side_menu)
         self.deiconify()
+
     def change_themes(self,theme):
         app_settings.load_settings()
         self.reload()
