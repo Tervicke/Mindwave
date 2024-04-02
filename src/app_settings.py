@@ -5,6 +5,8 @@ Settings= {  }
 #color for green -> 34C759
 #color for red -> red
 
+colors = {"Blue":"#007AFF" , "Red":"Red" , "Green":"#34c759"}
+
 def load_settings():
     global Settings
     with open('src/settings.json', 'r') as file:

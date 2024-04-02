@@ -16,15 +16,17 @@ class Menubar(tk.Frame):
         self.Datelabel = tk.Label(self) 
         #self.setup_label()
         
-        self.edit_icon= tk.PhotoImage(file="icons/edit_green.png")
+        self.colors = {"blue":"#007AFF" , "red":"Red" , "green":"#34c759"}
+
+        self.edit_icon= tk.PhotoImage(file="icons/edit_" + self.get_keys_by_value(app_settings.Settings['Theme_color'])[0] + ".png")
         self.edit_todays = tk.Button(self ,image=self.edit_icon ,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.open_todays)
         self.edit_todays.pack(side='left',padx=0,pady=10)
 
-        self.save_icon= tk.PhotoImage(file="icons/save_green.png")
+        self.save_icon= tk.PhotoImage(file="icons/save_" + self.get_keys_by_value(app_settings.Settings['Theme_color'])[0] + ".png")
         self.save_todays= tk.Button(self ,image=self.save_icon ,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.save_todays)
         self.save_todays.pack(side='left',padx=2,pady=10)
 
-        self.settings_icon= tk.PhotoImage(file="icons/settings_green.png")
+        self.settings_icon= tk.PhotoImage(file="icons/settings_" + self.get_keys_by_value(app_settings.Settings['Theme_color'])[0] + ".png")
         self.settings_button= tk.Button(self ,image=self.settings_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.open_settings)
         self.settings_button.pack(side='right',padx=2,pady=10)
 
@@ -77,3 +79,10 @@ class Menubar(tk.Frame):
     def reset_prompt(self):
         if self.editor_widget:
             self.editor_widget.set_prompt()
+
+    def get_keys_by_value(self,value):
+        keys = []
+        for key, val in self.colors.items():
+            if val == value:
+                keys.append(key)
+        return keys if keys else None
