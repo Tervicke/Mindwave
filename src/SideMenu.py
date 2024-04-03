@@ -65,14 +65,27 @@ class Sidemenu(tk.Frame):
 
         tags_container= tk.Frame(self)
         tags_container.config(background=app_settings.Settings['Background_color'])
-        tags_container.config(bg='blue')
         tags_container.grid(row=2,column=0,sticky='ew')
 
+        list_of_tags = [
+            ["happy", "#B8860B"],
+            ["sad", "grey"],
+            ["excited", "green"],
+            ["angry", "red"],
+        ]
+
+        for tag_name, color in list_of_tags:
+            label = tk.Label(tags_container, text=tag_name, bg=color, padx=5, pady=2)
+            label.font=app_settings.App_font
+            label.config(fg='white')
+            label.pack(side=tk.LEFT, padx=2, pady=5)
+        '''
         tag1 = Tag(tags_container, text="Tag 1", bg="lightblue", text_color="black")
         tag1.pack(padx=5, pady=5)
         tag2 = Tag(tags_container, text="Tag 2", bg="lightgreen", text_color="white")
         tag2.pack( padx=5, pady=5)
-       
+        '''
+
 class Tag(tk.Frame):
     def __init__(self, master=None, text="", bg="lightgray", text_color="black", **kwargs):
         super().__init__(master, bg=bg, **kwargs)
