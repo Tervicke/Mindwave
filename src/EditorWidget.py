@@ -240,7 +240,7 @@ class Editorwidget(tk.Text):
             "date":formatted_date,
             "content":"",
             "tags": ["Sample Tag1", "Sameple tag2", "Sample tag3"]
-            # this will return a tag list from the frontend component
+            # This will return a tag list from the frontend component
         }
         with open(today_date_file, "w") as file:
             json_data['content']=markdown_content
