@@ -4,7 +4,6 @@ from EditorWidget import Editorwidget
 from SideMenu import Sidemenu
 from MenuBar import Menubar
 from SettingsPanel import Settingspanel
-
 class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()

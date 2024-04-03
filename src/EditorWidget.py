@@ -5,6 +5,7 @@ from datetime import datetime
 from tkinter import *
 import re
 import os
+import json
 class Editorwidget(tk.Text):
     def __init__(self, master=None,**kw):
         super().__init__(master ,**kw) 
@@ -137,13 +138,15 @@ class Editorwidget(tk.Text):
     def open_todays(self,event=None):
         #set date today's date
         #cal.selection_set(datetime.today().date())
-        today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".md"
+        today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".json"
         self.configure(state='normal')
         self.delete('1.0', 'end')
         self.focus_set()
         try:
             with open(today_date_file, 'r') as Today_file:
-                self.apply_formatting(Today_file.read())
+                raw_data = Today_file.read()
+                json_data = json.loads(raw_data)
+                self.apply_formatting(json_data['content'])
         except FileNotFoundError:
                 self.set_template()
                 self.config(state='normal')
@@ -230,20 +233,33 @@ class Editorwidget(tk.Text):
             
             start_index = end_index
         
-        today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".md"
+        today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".json"
+        formatted_date = datetime.now().strftime('%-d %B %Y')
+        #save the .json file
+        json_data = {
+            "date":formatted_date,
+            "content":"",
+            "tags": ["Sample Tag1", "Sameple tag2", "Sample tag3"]
+            # this will return a tag list from the frontend component
+        }
         with open(today_date_file, "w") as file:
-            file.write(markdown_content) 
+            json_data['content']=markdown_content
+            file.write(json.dumps(json_data) )
         self.config(state='disabled')
 
     def open_date(self,date):
 
-        file_name = app_settings.Settings['Diary_folder']+'/' + date.replace('/','-') + '.md'
+        file_name = app_settings.Settings['Diary_folder']+'/' + date.replace('/','-') + '.json'
 
         self.configure(state='normal')
         self.delete('1.0', 'end')
         if os.path.exists(file_name):
             with open(file_name) as Diary_File:
-                self.apply_formatting(Diary_File.read())
+                print(Diary_File)
+                raw_data= Diary_File.read()
+                print(raw_data)
+                json_data = json.loads(raw_data)
+                self.apply_formatting(json_data['content'])
                 if date == datetime.now().strftime("%d/%m/%y"):
                     self.configure(state="normal")
                     self.focus_set()
