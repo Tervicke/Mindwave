@@ -255,9 +255,7 @@ class Editorwidget(tk.Text):
         self.delete('1.0', 'end')
         if os.path.exists(file_name):
             with open(file_name) as Diary_File:
-                print(Diary_File)
                 raw_data= Diary_File.read()
-                print(raw_data)
                 json_data = json.loads(raw_data)
                 self.apply_formatting(json_data['content'])
                 if date == datetime.now().strftime("%d/%m/%y"):
@@ -277,7 +275,6 @@ class Editorwidget(tk.Text):
                 self.config(state='disabled')
 
     def set_template(self):
-        print(app_settings.Settings['Template'])
         if not app_settings.Settings['Template'] == "None":
             with open('templates/'+ app_settings.Settings['Template'] + '.md', 'r') as Template:
                 self.apply_formatting(Template.read())
