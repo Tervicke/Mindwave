@@ -2,6 +2,8 @@ import tkinter as tk
 import app_settings
 from tkcalendar import Calendar
 from EditorWidget import Editorwidget 
+import os
+import json
 class Sidemenu(tk.Frame):
     def __init__(self, master=None, **kw):
         super().__init__(master, **kw)
@@ -35,8 +37,20 @@ class Sidemenu(tk.Frame):
         self.editor_widget = editor_widget
 
     def date_selected(self,event=None):
+        date = self.calendar.get_date()
+        #update the editor widget
         if self.editor_widget:
-            self.editor_widget.open_date(self.calendar.get_date())
+            self.editor_widget.open_date(date)
+        #open the file associated with it and write get the tags and then update by setup_tags()
+        file_name = app_settings.Settings['Diary_folder']+'/' + date.replace('/','-') + '.json'
+        if os.path.exists(file_name):
+            with open(file_name) as Diary_File:
+                raw_data= Diary_File.read()
+                json_data = json.loads(raw_data)
+                self.add_tags(json_data['tags'])
+        else:
+            self.clear_container(self.tags_container) 
+
     def change_calendar_theme(self,updated_color):
         self.calendar.config(selectbackground=updated_color)
     def reload(self):
@@ -54,19 +68,19 @@ class Sidemenu(tk.Frame):
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
     def setup_tags(self):
 
-        tags_label = tk.Label(self, text="Tags")
-        tags_label.config(font=app_settings.App_font)
-        tags_label.config(background=app_settings.Settings['Background_color'])
-        tags_label.config(foreground=app_settings.Settings['Foreground_color'])
-        tags_label.grid(row=1,column=0,stick='w')
+        self.tags_label = tk.Label(self, text="Tags")
+        self.tags_label.config(font=app_settings.App_font)
+        self.tags_label.config(background=app_settings.Settings['Background_color'])
+        self.tags_label.config(foreground=app_settings.Settings['Foreground_color'])
+        self.tags_label.grid(row=1,column=0,stick='w')
 
         self.tags_container= tk.Frame(self)
         self.tags_container.config(background=app_settings.Settings['Background_color'])
         self.tags_container.grid(row=2,column=0,sticky='ew')
 
-        self.add_tags()
+    def add_tags(self,tags_list):
+        '''
 
-    def add_tags(self):
         tags_list = [
             ["happy", "#FFD700", "#000000"],       # Yellow for happy, black foreground
             ["sad", "#4169E1", "#FFFFFF"],         # Dark blue for sad, white foreground
@@ -80,9 +94,11 @@ class Sidemenu(tk.Frame):
             ["memories", "#9400D3", "#FFFFFF"]     # Dark violet for memories, white foreground
         ]
 
+        '''
         # width of the the only label without character - 12 
         #width of each character is - 8 
-        
+        self.clear_container(self.tags_container) 
+
         self.tags_container.update()
         container_width = self.tags_container.winfo_width()
 
@@ -100,7 +116,7 @@ class Sidemenu(tk.Frame):
             #check if the tag can exist in the same line
             label = tk.Label(tags_frame_list[current_frame], text=tag_name, bg=bg_color,foreground=fg_color,padx=5, pady=2)
             label.font=app_settings.App_font
-            if container_width - (tags_added * 12 + self.total_width_of_tags(tags_list,tags_added) ) > 12 + len(tags_list[tags_added] )*8:
+            if container_width - (tags_added * 12 + self.total_width_of_tags(tags_list,tags_added) ) - 100 > 12 + len(tags_list[tags_added] )*8:
                 label.pack(side='left', padx=2, pady=5 ,anchor='w')
             else:
                 #make a new frame and append that tag to the that frame 
@@ -113,6 +129,9 @@ class Sidemenu(tk.Frame):
 
                 label.pack(side='left', padx=2, pady=5 ,anchor='w')
             tags_added +=1
+    def clear_container(self,parent_widget):
+        for widget in parent_widget.winfo_children():
+            widget.destroy()
 
     def total_width_of_tags(self,tags_list , i ):
         ans = 0
