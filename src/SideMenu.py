@@ -5,11 +5,8 @@ from EditorWidget import Editorwidget
 class Sidemenu(tk.Frame):
     def __init__(self, master=None, **kw):
         super().__init__(master, **kw)
-
         self.editor_widget = None
-
         self.configure(bg=app_settings.Settings['Background_color'])
-
         self.calendar =  Calendar(self)
         self.setup_calendar()
         self.setup_tags()
@@ -70,7 +67,6 @@ class Sidemenu(tk.Frame):
         self.add_tags()
 
     def add_tags(self):
-
         tags_list = [
             ["happy", "#FFD700", "#000000"],       # Yellow for happy, black foreground
             ["sad", "#4169E1", "#FFFFFF"],         # Dark blue for sad, white foreground
@@ -92,11 +88,10 @@ class Sidemenu(tk.Frame):
 
         #making 3 frames right now only  
         tags_frame_list = []
-        for i in range(10):  # Create 3 frames for demonstration
-            frame = tk.Frame(self.tags_container, bg="lightgray")
-            frame.config(bg=app_settings.Settings['Background_color'])
-            frame.pack(fill='x')
-            tags_frame_list.append(frame)
+        #add a initial frame
+        frame = tk.Frame(self.tags_container, bg=app_settings.Settings['Background_color'])
+        frame.pack(fill='x')
+        tags_frame_list.append(frame)
 
         tags_added = 0
         current_frame = 0
@@ -108,8 +103,15 @@ class Sidemenu(tk.Frame):
             if container_width - (tags_added * 12 + self.total_width_of_tags(tags_list,tags_added) ) > 12 + len(tags_list[tags_added] )*8:
                 label.pack(side='left', padx=2, pady=5 ,anchor='w')
             else:
+                #make a new frame and append that tag to the that frame 
+                frame = tk.Frame(self.tags_container, bg=app_settings.Settings['Background_color'])
+                frame.pack(fill='x')
+                tags_frame_list.append(frame)
+
                 tags_added = 0
                 current_frame+=1
+
+                label.pack(side='left', padx=2, pady=5 ,anchor='w')
             tags_added +=1
 
     def total_width_of_tags(self,tags_list , i ):
