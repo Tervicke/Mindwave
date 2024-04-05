@@ -63,38 +63,43 @@ class Sidemenu(tk.Frame):
         tags_label.config(foreground=app_settings.Settings['Foreground_color'])
         tags_label.grid(row=1,column=0,stick='w')
 
-        tags_container= tk.Frame(self)
-        tags_container.config(background=app_settings.Settings['Background_color'])
-        tags_container.grid(row=2,column=0,sticky='ew')
+        self.tags_container= tk.Frame(self)
+        self.tags_container.config(background=app_settings.Settings['Background_color'])
+        self.tags_container.grid(row=2,column=0,sticky='ew')
 
-        list_of_tags = [
-            ["happy", "#B8860B"],
-            ["sad", "grey"],
-            ["excited", "green"],
-            ["angry", "red"],
+        self.add_tags()
+
+    def add_tags(self):
+        tags_list = [
+            ["happy", "#FFD700", "#000000"],       # Yellow for happy, black foreground
+            ["sad", "#4169E1", "#FFFFFF"],         # Dark blue for sad, white foreground
+            ["work", "#FF4500", "#FFFFFF"],        # Orange-red for work-related entries, white foreground
+            ["personal", "#00CED1", "#000000"],    # Dark cyan for personal entries, black foreground
+            ["goals", "#FF69B4", "#000000"],       # Pink for goals, black foreground
+            ["reflection", "#FF6347", "#FFFFFF"],  # Tomato red for reflection, white foreground
+            ["health", "#87CEEB", "#000000"],      # Sky blue for health-related entries, black foreground
+            ["travel", "#32CD32", "#FFFFFF"],      # Lime green for travel, white foreground
+            ["ideas", "#FF1493", "#FFFFFF"],       # Deep pink for ideas, white foreground
+            ["memories", "#9400D3", "#FFFFFF"]     # Dark violet for memories, white foreground
         ]
 
-        for tag_name, color in list_of_tags:
-            label = tk.Label(tags_container, text=tag_name, bg=color, padx=5, pady=2)
+        # width of the the only label without character - 12 
+        #width of each character is - 8 
+        tags_added = 0
+
+        self.tags_container.update()
+        container_width = self.tags_container.winfo_width()
+        for tag_name, bg_color,fg_color in tags_list:
+            #check if the tag can exist in the same line
+            label = tk.Label(self.tags_container, text=tag_name, bg=bg_color,foreground=fg_color,padx=5, pady=2)
             label.font=app_settings.App_font
-            label.config(fg='white')
-            label.pack(side=tk.LEFT, padx=2, pady=5)
-        '''
-        tag1 = Tag(tags_container, text="Tag 1", bg="lightblue", text_color="black")
-        tag1.pack(padx=5, pady=5)
-        tag2 = Tag(tags_container, text="Tag 2", bg="lightgreen", text_color="white")
-        tag2.pack( padx=5, pady=5)
-        '''
+            if container_width - (tags_added * 12 + self.total_width_of_tags(tags_list,tags_added) ) > 12 + len(tags_list[tags_added] )*8:
+                label.pack(side=tk.LEFT, padx=2, pady=5)
+            tags_added +=1
 
-class Tag(tk.Frame):
-    def __init__(self, master=None, text="", bg="lightgray", text_color="black", **kwargs):
-        super().__init__(master, bg=bg, **kwargs)
-        self.text = text
-        self.text_color = text_color
-        self._create_widgets()
-
-    def _create_widgets(self):
-        self.label = tk.Label(self, text=self.text, bg=self["bg"], fg=self.text_color)
-        self.label.pack(expand=True, fill="both", padx=5, pady=2)
-
+    def total_width_of_tags(self,tags_list , i ):
+        ans = 0
+        for tag_name,bg_color,fg_color in tags_list[:i]:
+            ans += len(tag_name)
+        return ans*8 
 
