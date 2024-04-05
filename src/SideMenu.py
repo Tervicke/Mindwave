@@ -70,6 +70,7 @@ class Sidemenu(tk.Frame):
         self.add_tags()
 
     def add_tags(self):
+
         tags_list = [
             ["happy", "#FFD700", "#000000"],       # Yellow for happy, black foreground
             ["sad", "#4169E1", "#FFFFFF"],         # Dark blue for sad, white foreground
@@ -85,16 +86,30 @@ class Sidemenu(tk.Frame):
 
         # width of the the only label without character - 12 
         #width of each character is - 8 
-        tags_added = 0
-
+        
         self.tags_container.update()
         container_width = self.tags_container.winfo_width()
+
+        #making 3 frames right now only  
+        tags_frame_list = []
+        for i in range(10):  # Create 3 frames for demonstration
+            frame = tk.Frame(self.tags_container, bg="lightgray")
+            frame.config(bg=app_settings.Settings['Background_color'])
+            frame.pack(fill='x')
+            tags_frame_list.append(frame)
+
+        tags_added = 0
+        current_frame = 0
+
         for tag_name, bg_color,fg_color in tags_list:
             #check if the tag can exist in the same line
-            label = tk.Label(self.tags_container, text=tag_name, bg=bg_color,foreground=fg_color,padx=5, pady=2)
+            label = tk.Label(tags_frame_list[current_frame], text=tag_name, bg=bg_color,foreground=fg_color,padx=5, pady=2)
             label.font=app_settings.App_font
             if container_width - (tags_added * 12 + self.total_width_of_tags(tags_list,tags_added) ) > 12 + len(tags_list[tags_added] )*8:
-                label.pack(side=tk.LEFT, padx=2, pady=5)
+                label.pack(side='left', padx=2, pady=5 ,anchor='w')
+            else:
+                tags_added = 0
+                current_frame+=1
             tags_added +=1
 
     def total_width_of_tags(self,tags_list , i ):
