@@ -138,4 +138,3 @@ class Sidemenu(tk.Frame):
         for tag_name,bg_color,fg_color in tags_list[:i]:
             ans += len(tag_name)
         return ans*8 
-

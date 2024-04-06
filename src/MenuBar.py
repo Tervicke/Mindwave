@@ -29,7 +29,10 @@ class Menubar(tk.Frame):
         self.settings_icon= tk.PhotoImage(file="icons/settings_" + self.get_keys_by_value(app_settings.Settings['Theme_color'])[0] + ".png")
         self.settings_button= tk.Button(self ,image=self.settings_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.open_settings)
         self.settings_button.pack(side='right',padx=2,pady=10)
-
+        
+        self.search_entry = tk.Entry(self)
+        self.search_entry.config(font=app_settings.App_font)
+        self.search_entry.pack(side='left',padx=10,pady=10)
 
     def setup_label(self):
         self.Datelabel.config(bg=app_settings.Settings['Background_color'])
