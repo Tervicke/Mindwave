@@ -29,10 +29,17 @@ class Menubar(tk.Frame):
         self.settings_icon= tk.PhotoImage(file="icons/settings_" + self.get_keys_by_value(app_settings.Settings['Theme_color'])[0] + ".png")
         self.settings_button= tk.Button(self ,image=self.settings_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.open_settings)
         self.settings_button.pack(side='right',padx=2,pady=10)
-        
+       
+
+        self.tags_icon= tk.PhotoImage(file="icons/tags_" + self.get_keys_by_value(app_settings.Settings['Theme_color'])[0] + ".png")
+        #self.tags_icon= tk.PhotoImage(file="icons/tags_grey.png")
+        self.tags_edit_button= tk.Button(self ,image=self.tags_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.edit_tags)
+        self.tags_edit_button.pack(side='left',padx=2,pady=10)
+
         self.search_entry = tk.Entry(self)
         self.search_entry.config(font=app_settings.App_font)
         self.search_entry.pack(side='left',padx=10,pady=10)
+
 
     def setup_label(self):
         self.Datelabel.config(bg=app_settings.Settings['Background_color'])
@@ -89,3 +96,5 @@ class Menubar(tk.Frame):
             if val == value:
                 keys.append(key)
         return keys if keys else None
+    def edit_tags(self):
+        pass

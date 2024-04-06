@@ -12,6 +12,7 @@ class Sidemenu(tk.Frame):
         self.calendar =  Calendar(self)
         self.setup_calendar()
         self.setup_tags()
+
     def setup_calendar(self):
         self.calendar.config(selectmode='day')
         self.calendar.config(foreground=app_settings.Settings['Foreground_color'])
@@ -67,22 +68,29 @@ class Sidemenu(tk.Frame):
         self.calendar.config(selectbackground=app_settings.Settings['Theme_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
     def setup_tags(self):
+        self.tags_heading_container = tk.Frame(self)
+        self.tags_heading_container.config(background=app_settings.Settings['Background_color'])
+        self.tags_heading_container.config(highlightbackground=app_settings.Settings['Background_color'])
+        self.tags_heading_container.grid(row=1,column=0,sticky='ew')
 
-        self.tags_label = tk.Label(self, text="Tags")
+        self.tags_label = tk.Label(self.tags_heading_container, text="Tags")
         self.tags_label.config(font=app_settings.App_font)
         self.tags_label.config(background=app_settings.Settings['Background_color'])
         self.tags_label.config(foreground=app_settings.Settings['Foreground_color'])
-        self.tags_label.grid(row=1,column=0,stick='w')
+        self.tags_label.pack(side='left')
 
         self.tags_container= tk.Frame(self)
         self.tags_container.config(background=app_settings.Settings['Background_color'])
         self.tags_container.grid(row=2,column=0,sticky='ew')
+        
+
+    def tags_button_clicked(self):
+        print("dkfaj")
 
     def add_tags(self,tags_list):
         '''
 
-        tags_list = [
-            ["happy", "#FFD700", "#000000"],       # Yellow for happy, black foreground
+        tags_list = [ ["happy", "#FFD700", "#000000"],       # Yellow for happy, black foreground
             ["sad", "#4169E1", "#FFFFFF"],         # Dark blue for sad, white foreground
             ["work", "#FF4500", "#FFFFFF"],        # Orange-red for work-related entries, white foreground
             ["personal", "#00CED1", "#000000"],    # Dark cyan for personal entries, black foreground
