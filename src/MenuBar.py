@@ -4,7 +4,7 @@ from datetime import datetime
 from EditorWidget import Editorwidget
 from SettingsPanel import Settingspanel
 from TagsPanel import Tagspanel
-from test1 import TagSelectorFrame 
+from SideMenu import Sidemenu
 class Menubar(tk.Frame):
     def __init__(self,master=None, **kw):
         super().__init__(master, **kw)
@@ -12,6 +12,7 @@ class Menubar(tk.Frame):
         self.editor_widget  = None
         self.settings_panel = None
         self.tags_panel = None
+        self.side_menu= None
 
         self.configure(bg=app_settings.Settings['Background_color'])
         self.configure(height=50)
@@ -102,6 +103,9 @@ class Menubar(tk.Frame):
     def set_tags_panel(self,tags_panel):
         self.tags_panel = tags_panel
     def edit_tags(self):
-        if self.tags_panel:
-            tag_selector_window = TagSelectorFrame(self)
+        tag_selector_window = Tagspanel(self,self.update_tags)
 
+    def set_side_menu(self,side_menu):
+        self.side_menu=side_menu 
+    def update_tags(self,selected_tags):
+        self.side_menu.add_tags(selected_tags)
