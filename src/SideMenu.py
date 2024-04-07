@@ -9,10 +9,11 @@ class Sidemenu(tk.Frame):
         super().__init__(master, **kw)
         self.editor_widget = None
         self.configure(bg=app_settings.Settings['Background_color'])
+        self.current_tags = None  
         self.calendar =  Calendar(self)
         self.setup_calendar()
         self.setup_tags()
-
+    
     def setup_calendar(self):
         self.calendar.config(selectmode='day')
         self.calendar.config(foreground=app_settings.Settings['Foreground_color'])
@@ -88,21 +89,7 @@ class Sidemenu(tk.Frame):
         print("dkfaj")
 
     def add_tags(self,tags_list):
-        '''
-
-        tags_list = [ ["happy", "#FFD700", "#000000"],       # Yellow for happy, black foreground
-            ["sad", "#4169E1", "#FFFFFF"],         # Dark blue for sad, white foreground
-            ["work", "#FF4500", "#FFFFFF"],        # Orange-red for work-related entries, white foreground
-            ["personal", "#00CED1", "#000000"],    # Dark cyan for personal entries, black foreground
-            ["goals", "#FF69B4", "#000000"],       # Pink for goals, black foreground
-            ["reflection", "#FF6347", "#FFFFFF"],  # Tomato red for reflection, white foreground
-            ["health", "#87CEEB", "#000000"],      # Sky blue for health-related entries, black foreground
-            ["travel", "#32CD32", "#FFFFFF"],      # Lime green for travel, white foreground
-            ["ideas", "#FF1493", "#FFFFFF"],       # Deep pink for ideas, white foreground
-            ["memories", "#9400D3", "#FFFFFF"]     # Dark violet for memories, white foreground
-        ]
-
-        '''
+        self.current_tags= tags_list
         # width of the the only label without character - 12 
         #width of each character is - 8 
         self.clear_container(self.tags_container) 
@@ -146,3 +133,9 @@ class Sidemenu(tk.Frame):
         for tag_name,bg_color,fg_color in tags_list[:i]:
             ans += len(tag_name)
         return ans*8 
+
+    def get_tags(self):
+        if self.current_tags:
+            return self.current_tags
+        else:
+            return []

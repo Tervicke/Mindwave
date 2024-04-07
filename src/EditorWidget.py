@@ -46,8 +46,8 @@ class Editorwidget(tk.Text):
         self.bind("<Control-u>", self.toggle_underline)
         self.bind("<Control-r>", self.change_selected_text_color)
 
-        self.bind("<Control-s>", self.save_todays)
-        self.bind("<Control-o>", self.open_todays)
+        #self.bind("<Control-s>", self.save_todays)
+        #self.bind("<Control-o>", self.open_todays)
 
 
         #set focus 
@@ -187,6 +187,48 @@ class Editorwidget(tk.Text):
                 self.insert(tk.END, md_content[i])
 
             i += 1
+    def get_editor_content(self):
+        markdown_content = ""
+        start_index = "1.0"
+        while True:
+            bold_start = self.search(r'\S', start_index, stopindex="end", regexp=True, count=1, nocase=True)
+            italic_start = self.search(r'\S', start_index, stopindex="end", regexp=True, count=1, nocase=True)
+            underline_start = self.search(r'\S', start_index, stopindex="end", regexp=True, count=1, nocase=True)
+            
+            # Find the earliest starting index among all formatting types
+            next_start = min((bold_start, italic_start, underline_start), key=lambda x: float("inf") if not x else float(x.split(".")[1]))
+            
+            if not next_start:
+                break
+            
+            # Add the section of text before the next formatting
+            end_index = self.search(r'\s', next_start, stopindex="end", regexp=True, count=1, nocase=True)
+            if not end_index:
+                end_index = "end"
+            
+            markdown_content += self.get(start_index, next_start)
+            
+            # Add Markdown syntax for formatting
+            if "bold" in self.tag_names(next_start):
+                markdown_content += "**"
+            if "italic" in self.tag_names(next_start):
+                markdown_content += "*"
+            if "underline" in self.tag_names(next_start):
+                markdown_content += "__"
+            
+            # Add the section of text with formatting
+            markdown_content += self.get(next_start, end_index)
+            
+            # Close Markdown syntax for formatting
+            if "underline" in self.tag_names(next_start):
+                markdown_content += "__"
+            if "italic" in self.tag_names(next_start):
+                markdown_content += "*"
+            if "bold" in self.tag_names(next_start):
+                markdown_content += "**"
+            
+            start_index = end_index
+        return markdown_content 
 
     def save_todays(self,Event=None):
         if self.cget('state')=="disabled":
@@ -238,11 +280,11 @@ class Editorwidget(tk.Text):
         #save the .json file
         json_data = {
             "date":formatted_date,
-            "content":"",
-            # This will return a tag list from the frontend component
+            "content":""
         }
         with open(today_date_file, "w") as file:
             json_data['content']=markdown_content
+            print(json.dumps(json_data))
             file.write(json.dumps(json_data) )
         self.config(state='disabled')
 
