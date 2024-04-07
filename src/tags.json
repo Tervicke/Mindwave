@@ -1,0 +1,13 @@
+[
+    ["happy", "#FFD700", "#000000"],
+    ["sad", "#4169E1", "#FFFFFF"],
+    ["work", "#FF4500", "#FFFFFF"],
+    ["personal", "#00CED1", "#000000"],
+    ["goals", "#FF69B4", "#000000"],
+    ["reflection", "#FF6347", "#FFFFFF"],
+    ["health", "#87CEEB", "#000000"],
+    ["travel", "#32CD32", "#FFFFFF"],
+    ["ideas", "#FF1493", "#FFFFFF"],
+    ["memories", "#9400D3", "#FFFFFF"]
+]
+
