@@ -78,8 +78,28 @@ class Menubar(tk.Frame):
         self.editor_widget.config(state='disabled')
 
     def open_todays(self):
-        if self.editor_widget:
-            self.editor_widget.open_todays()
+        today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".json"
+        if self.editor_widget and self.side_menu:
+            #clear the editor and setup for the writing text
+            self.editor_widget.configure(state='normal')
+            self.editor_widget.delete('1.0','end')
+            self.editor_widget.focus_set()
+            #enable the button 
+            self.enable_tags_button()
+            #set the calendar date to today
+            self.side_menu.calendar.selection_set(datetime.today())
+            try :
+                with open(today_date_file , 'r') as Today_file:
+                    #update the editor
+                    raw_data = Today_file.read()
+                    json_data = json.loads(raw_data)
+                    self.editor_widget.apply_formatting(json_data['content'])
+                    #update the tags
+                    self.side_menu.add_tags(json_data['tags'])
+            except FileNotFoundError:
+               self.editor_widget.set_template()
+               self.editor_widget.config(state='normal')
+               self.editor_widget.focus_set()
 
     def reload(self):
         self.configure(bg=app_settings.Settings['Background_color'])
@@ -130,3 +150,6 @@ class Menubar(tk.Frame):
     def disabled(self):
         pass
         #do nothing
+    def enable_tags_button(self):
+        self.tags_edit_button.config(command=self.edit_tags)
+        self.tags_edit_button.config(image=self.tags_icon)
