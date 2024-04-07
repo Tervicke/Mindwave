@@ -239,7 +239,6 @@ class Editorwidget(tk.Text):
         json_data = {
             "date":formatted_date,
             "content":"",
-            "tags": ["Sample Tag1", "Sameple tag2", "Sample tag3"]
             # This will return a tag list from the frontend component
         }
         with open(today_date_file, "w") as file:
