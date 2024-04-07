@@ -4,6 +4,7 @@ from tkcalendar import Calendar
 from EditorWidget import Editorwidget 
 import os
 import json
+from datetime import datetime
 class Sidemenu(tk.Frame):
     def __init__(self, master=None, **kw):
         super().__init__(master, **kw)
@@ -40,6 +41,8 @@ class Sidemenu(tk.Frame):
 
     def date_selected(self,event=None):
         date = self.calendar.get_date()
+        if datetime.today().strftime("%d/%m/%y") != date:
+            self.master.disable_tags_button()
         #update the editor widget
         if self.editor_widget:
             self.editor_widget.open_date(date)
@@ -68,6 +71,7 @@ class Sidemenu(tk.Frame):
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(selectbackground=app_settings.Settings['Theme_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
+
     def setup_tags(self):
         self.tags_heading_container = tk.Frame(self)
         self.tags_heading_container.config(background=app_settings.Settings['Background_color'])

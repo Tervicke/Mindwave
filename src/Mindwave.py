@@ -50,7 +50,9 @@ class MainWindow(tk.Tk):
 
     def reload(self):
         self.configure(bg=app_settings.Settings['Background_color'])  
-    
+    def disable_tags_button(self):
+        self.menu_bar.disable_tags_button()
+
 if __name__ == "__main__":
     app = MainWindow()
     app.mainloop()

@@ -38,7 +38,7 @@ class Menubar(tk.Frame):
 
         self.tags_icon= tk.PhotoImage(file="icons/tags_" + self.get_keys_by_value(app_settings.Settings['Theme_color'])[0] + ".png")
         #self.tags_icon= tk.PhotoImage(file="icons/tags_grey.png")
-        self.tags_edit_button= tk.Button(self ,image=self.tags_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.edit_tags)
+        self.tags_edit_button= tk.Button(self ,image=self.tags_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'] , activebackground=app_settings.Settings['Background_color'],command=self.edit_tags,highlightthickness=0)
         self.tags_edit_button.pack(side='left',padx=2,pady=10)
 
         self.search_entry = tk.Entry(self)
@@ -76,9 +76,11 @@ class Menubar(tk.Frame):
         with open(today_date_file, "w") as file:
             file.write(json.dumps(json_data) )
         self.editor_widget.config(state='disabled')
+
     def open_todays(self):
         if self.editor_widget:
             self.editor_widget.open_todays()
+
     def reload(self):
         self.configure(bg=app_settings.Settings['Background_color'])
 
@@ -117,8 +119,14 @@ class Menubar(tk.Frame):
         self.tags_panel = tags_panel
     def edit_tags(self):
         tag_selector_window = Tagspanel(self,self.update_tags)
-
     def set_side_menu(self,side_menu):
         self.side_menu=side_menu 
     def update_tags(self,selected_tags):
         self.side_menu.add_tags(selected_tags)
+    def disable_tags_button(self):
+        self.tags_edit_button.config(command=self.disabled)
+        self.disabled_icon = tk.PhotoImage(file="icons/tags_grey.png")
+        self.tags_edit_button.config(image=self.disabled_icon)
+    def disabled(self):
+        pass
+        #do nothing
