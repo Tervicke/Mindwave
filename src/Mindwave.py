@@ -4,6 +4,7 @@ from EditorWidget import Editorwidget
 from SideMenu import Sidemenu
 from MenuBar import Menubar
 from SettingsPanel import Settingspanel
+from TagsPanel import Tagspanel
 class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -19,6 +20,7 @@ class MainWindow(tk.Tk):
         self.side_menu = Sidemenu(self)
         self.menu_bar = Menubar(self,)
         self.setting_panel = Settingspanel(self)
+        self.tags_panel = Tagspanel(self)
 
         #placing the widgets 
         self.menu_bar.pack(fill='x',side='top',padx=10)
@@ -32,6 +34,7 @@ class MainWindow(tk.Tk):
         self.menu_bar.set_settings_panel(self.setting_panel)
         self.side_menu.set_editor_widget(self.editor_widget)
         self.setting_panel.set_side_menu(self.side_menu)
+        self.menu_bar.set_tags_panel(self.tags_panel)
         self.deiconify()
 
     def change_themes(self,theme):

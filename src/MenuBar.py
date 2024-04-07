@@ -3,12 +3,15 @@ import app_settings
 from datetime import datetime 
 from EditorWidget import Editorwidget
 from SettingsPanel import Settingspanel
+from TagsPanel import Tagspanel
+from test1 import TagSelectorFrame 
 class Menubar(tk.Frame):
     def __init__(self,master=None, **kw):
         super().__init__(master, **kw)
 
         self.editor_widget  = None
         self.settings_panel = None
+        self.tags_panel = None
 
         self.configure(bg=app_settings.Settings['Background_color'])
         self.configure(height=50)
@@ -96,5 +99,9 @@ class Menubar(tk.Frame):
             if val == value:
                 keys.append(key)
         return keys if keys else None
+    def set_tags_panel(self,tags_panel):
+        self.tags_panel = tags_panel
     def edit_tags(self):
-        pass
+        if self.tags_panel:
+            tag_selector_window = TagSelectorFrame(self)
+
