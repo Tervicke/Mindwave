@@ -1,5 +1,6 @@
 import tkinter as tk
 import app_settings
+from datetime import datetime
 from EditorWidget import Editorwidget
 from SideMenu import Sidemenu
 from MenuBar import Menubar
@@ -26,7 +27,6 @@ class MainWindow(tk.Tk):
         self.editor_widget.pack(fill="both",expand=True , side="left",padx=10,pady=0)
         self.side_menu.pack(fill="both",expand=True,padx=10,pady=0)            
 
-        self.editor_widget.open_todays()
 
         #pass the objects menu
         self.menu_bar.set_editor_widget(self.editor_widget)
@@ -37,6 +37,9 @@ class MainWindow(tk.Tk):
 
         self.deiconify()
 
+        #open todays
+        self.side_menu.calendar.selection_set(datetime.today())
+        self.side_menu.date_selected()
     def change_themes(self,theme):
         app_settings.load_settings()
         self.reload()

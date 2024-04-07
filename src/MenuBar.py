@@ -72,10 +72,10 @@ class Menubar(tk.Frame):
             json_data['content']  = self.editor_widget.get_editor_content()
         if self.side_menu:
             json_data['tags'] = self.side_menu.get_tags()
-        print(json_data)
         today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".json"
         with open(today_date_file, "w") as file:
             file.write(json.dumps(json_data) )
+        self.editor_widget.config(state='disabled')
     def open_todays(self):
         if self.editor_widget:
             self.editor_widget.open_todays()
@@ -93,6 +93,7 @@ class Menubar(tk.Frame):
         self.settings_button.config(bg=app_settings.Settings['Background_color'])
         self.settings_button.config(highlightbackground=app_settings.Settings['Background_color'])
         self.settings_button.config(activebackground=app_settings.Settings['Background_color'])
+
 
     def set_settings_panel(self,settings_panel):
         self.settings_panel = settings_panel
