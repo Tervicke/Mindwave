@@ -53,6 +53,12 @@ class Tagspanel(tk.Toplevel):
             self.selected_tags.append(tag)
         self.refresh_tags_display()
 
+        # Get the current mouse position
+        x = self.master.winfo_pointerx()
+        y = self.master.winfo_pointery() + 100
+        
+        # Position the window under the mouse pointer
+        self.geometry(f"+{x}+{y}")
     def load_tags(self):
         """Load tags and their colors from a JSON file."""
         with open('src/tags.json', 'r') as file:
