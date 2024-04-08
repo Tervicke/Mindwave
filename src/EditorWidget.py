@@ -299,11 +299,7 @@ class Editorwidget(tk.Text):
                 raw_data= Diary_File.read()
                 json_data = json.loads(raw_data)
                 self.apply_formatting(json_data['content'])
-                if date == datetime.now().strftime("%d/%m/%y"):
-                    self.configure(state="normal")
-                    self.focus_set()
-                else:
-                    self.configure(state="disabled")
+                self.configure(state="disabled")
 
         else:
             if date == datetime.now().strftime("%d/%m/%y"):
