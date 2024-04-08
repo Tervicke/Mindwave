@@ -7,7 +7,7 @@ app_settings.load_settings()
 settings = app_settings.Settings
 
 class Tagspanel(tk.Toplevel):
-    def __init__(self, master,callback):
+    def __init__(self, master,callback,initial_tags):
         super().__init__(master)
         self.title("Tag Selector")
         self.configure(bg=settings['Background_color'])
@@ -46,6 +46,12 @@ class Tagspanel(tk.Toplevel):
         self.refresh_tags_display()
 
         self.callback = callback
+        self.initial_tags = initial_tags 
+
+        #append and load the initial tags 
+        for tag in self.initial_tags:
+            self.selected_tags.append(tag)
+        self.refresh_tags_display()
 
     def load_tags(self):
         """Load tags and their colors from a JSON file."""

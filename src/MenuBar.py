@@ -138,7 +138,7 @@ class Menubar(tk.Frame):
     def set_tags_panel(self,tags_panel):
         self.tags_panel = tags_panel
     def edit_tags(self):
-        tag_selector_window = Tagspanel(self,self.update_tags)
+        tag_selector_window = Tagspanel(self,self.update_tags , self.side_menu.get_tags())
     def set_side_menu(self,side_menu):
         self.side_menu=side_menu 
     def update_tags(self,selected_tags):
