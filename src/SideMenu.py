@@ -43,17 +43,28 @@ class Sidemenu(tk.Frame):
         date = self.calendar.get_date()
         if datetime.today().strftime("%d/%m/%y") != date:
             self.master.disable_tags_button()
-        #update the editor widget
-        if self.editor_widget:
-            self.editor_widget.open_date(date)
         #open the file associated with it and write get the tags and then update by setup_tags()
         file_name = app_settings.Settings['Diary_folder']+'/' + date.replace('/','-') + '.json'
+        file_name = os.path.expanduser(file_name)
         if os.path.exists(file_name):
             with open(file_name) as Diary_File:
                 raw_data= Diary_File.read()
                 json_data = json.loads(raw_data)
+                print(json_data['content']) 
+                #update the editor widget
+                self.editor_widget.configure(state='normal')
+                self.editor_widget.delete('1.0', 'end')
+                self.editor_widget.apply_formatting(json_data['content'])
+                self.editor_widget.config(state='disabled')
+                #add tags 
                 self.add_tags(json_data['tags'])
         else:
+            #remove the content from the editor widget and add No entry found
+            self.editor_widget.configure(state='normal')
+            self.editor_widget.delete('1.0', 'end')
+            self.editor_widget.insert('4.6',"No Entry found..")
+            self.editor_widget.config(state='disabled')
+            #remove the tags
             self.clear_container(self.tags_container) 
 
     def change_calendar_theme(self,updated_color):
@@ -89,8 +100,6 @@ class Sidemenu(tk.Frame):
         self.tags_container.grid(row=2,column=0,sticky='ew')
         
 
-    def tags_button_clicked(self):
-        print("dkfaj")
 
     def add_tags(self,tags_list):
         self.current_tags= tags_list

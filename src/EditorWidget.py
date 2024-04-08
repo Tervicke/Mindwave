@@ -288,29 +288,6 @@ class Editorwidget(tk.Text):
             file.write(json.dumps(json_data) )
         self.config(state='disabled')
 
-    def open_date(self,date):
-
-        file_name = app_settings.Settings['Diary_folder']+'/' + date.replace('/','-') + '.json'
-
-        self.configure(state='normal')
-        self.delete('1.0', 'end')
-        if os.path.exists(file_name):
-            with open(file_name) as Diary_File:
-                raw_data= Diary_File.read()
-                json_data = json.loads(raw_data)
-                self.apply_formatting(json_data['content'])
-                self.configure(state="disabled")
-
-        else:
-            if date == datetime.now().strftime("%d/%m/%y"):
-                self.configure(state='normal')
-                self.set_template()
-                self.focus_set()
-            else:
-                self.configure(state='normal')
-                self.insert('4.6',"No Entry found..")
-                self.config(state='disabled')
-
     def set_template(self):
         if not app_settings.Settings['Template'] == "None":
             with open('templates/'+ app_settings.Settings['Template'] + '.md', 'r') as Template:
