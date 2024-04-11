@@ -16,9 +16,16 @@ make all
 
 ## Screenshots
 <div style="display: flex;">
-  <img src="screenshots/dark_green_windows.png" alt="Image 1" style="width: 50%;">
-  <img src="screenshots/white_blue_windows.png" alt="Image 2 " style="width: 50%;">
+  <img alt="Image 1" style="width: 50%;">
+  <img  alt="Image 2 " style="width: 50%;">
 </div>
+<table>
+  <tr>
+    <td><img src="screenshots/white_blue_windows.png" alt="Image 1"></td>
+    <td><img  src="screenshots/dark_green_windows.png" alt="Image 2"></td>
+  </tr>
+</table>
+
 
 ## Contact
 [my website](tervicke.netlify.app)
