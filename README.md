@@ -14,8 +14,7 @@ make all
 ```
 
 ## Screenshots
-![screenshot1](screenshots/dark_green_windows.png)
-![screenshot2](screenshots/white_blue_windows.png)
+![screenshot1](screenshots/dark_green_windows.png) ![screenshot2](screenshots/white_blue_windows.png)
 
 ## Contact
 [my website](tervicke.netlify.app)
