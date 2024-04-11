@@ -6,6 +6,7 @@ from SettingsPanel import Settingspanel
 from TagsPanel import Tagspanel
 from SideMenu import Sidemenu
 import json
+import os
 class Menubar(tk.Frame):
     def __init__(self,master=None, **kw):
         super().__init__(master, **kw)
@@ -62,7 +63,7 @@ class Menubar(tk.Frame):
         self.editor_widget = editor_widget
 
     def save_todays(self):
-        formatted_date = datetime.now().strftime('%-d %B %Y')
+        formatted_date = datetime.now().strftime('%d %B %Y').lstrip('0') 
         json_data = {
             "date":formatted_date,
             "content":"",
@@ -70,9 +71,11 @@ class Menubar(tk.Frame):
         }
         if self.editor_widget:
             json_data['content']  = self.editor_widget.get_editor_content()
-        if self.side_menu:
+        if self.side_menu: 
             json_data['tags'] = self.side_menu.get_tags()
-        today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".json"
+        #today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".json"
+        today_date_file= os.path.join(app_settings.Settings['Diary_folder'], datetime.now().strftime("%d-%m-%y") + ".json")
+        print(today_date_file)
         with open(today_date_file, "w") as file:
             file.write(json.dumps(json_data) )
         self.editor_widget.config(state='disabled')
