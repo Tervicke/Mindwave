@@ -41,7 +41,7 @@ class Sidemenu(tk.Frame):
 
     def date_selected(self,event=None):
         selected_date_str = self.calendar.get_date()
-        selected_date = datetime.strptime(selected_date_str, "%m/%d/%y")
+        selected_date = datetime.strptime(selected_date_str, "%d/%m/%y")
         date= selected_date.strftime("%d/%m/%y")
         print(date)
         if datetime.today().strftime("%d/%m/%y") != date:
