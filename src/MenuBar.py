@@ -44,7 +44,7 @@ class Menubar(tk.Frame):
 
         self.search_entry = tk.Entry(self)
         self.search_entry.config(font=app_settings.App_font)
-        self.search_entry.pack(side='left',padx=10,pady=10)
+        #self.search_entry.pack(side='left',padx=10,pady=10)
 
 
     def setup_label(self):
