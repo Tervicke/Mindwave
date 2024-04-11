@@ -40,9 +40,7 @@ class Sidemenu(tk.Frame):
         self.editor_widget = editor_widget
 
     def date_selected(self,event=None):
-        selected_date_str = self.calendar.get_date()
-        selected_date = datetime.strptime(selected_date_str, "%d/%m/%y")
-        date= selected_date.strftime("%d/%m/%y")
+        date = self.calendar.selection_get().strftime("%d/%m/%y")
         print(date)
         if datetime.today().strftime("%d/%m/%y") != date:
             self.master.disable_tags_button()
@@ -51,6 +49,7 @@ class Sidemenu(tk.Frame):
         file_name = os.path.expanduser(file_name)
         print(file_name)
         if os.path.exists(file_name):
+            print("dkfjal")
             with open(file_name) as Diary_File:
                 raw_data= Diary_File.read()
                 json_data = json.loads(raw_data)
