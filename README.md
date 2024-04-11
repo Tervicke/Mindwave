@@ -10,11 +10,18 @@
 ```bash
 git clone https://github.com/tervicke/mindwave.git
 pip install -r requirements.txt
+
 make all
 ```
 
 ## Screenshots
-![screenshot1](screenshots/dark_green_windows.png) ![screenshot2](screenshots/white_blue_windows.png)
+<div style="display: flex;">
+  <img src="dark_green_windows.png" alt="Image 1" style="width: 50%;">
+  <img src="white_blue_windows.png" alt="Image 2 " style="width: 50%;">
+</div>
+ 
+<img  alt="Image 1" style="float: left; margin-right: 10px;">
+<img alt="Image 2" style="float: left;">
 
 ## Contact
 [my website](tervicke.netlify.app)
