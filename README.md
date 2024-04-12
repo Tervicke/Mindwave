@@ -31,6 +31,6 @@ make
 - [ ] image support
 
 ## Contact
-[my website](tervicke.netlify.app)
+[my website](https://tervicke.netlify.app/)
 
 
