@@ -100,9 +100,11 @@ class Menubar(tk.Frame):
                     #update the tags
                     self.side_menu.add_tags(json_data['tags'])
             except FileNotFoundError:
-               self.editor_widget.set_template()
-               self.editor_widget.config(state='normal')
-               self.editor_widget.focus_set()
+                #remove the tags 
+                self.side_menu.remove_tags()
+                self.editor_widget.set_template()
+                self.editor_widget.config(state='normal')
+                self.editor_widget.focus_set()
 
     def reload(self):
         self.configure(bg=app_settings.Settings['Background_color'])
