@@ -69,6 +69,8 @@ class Sidemenu(tk.Frame):
             self.editor_widget.config(state='disabled')
             #remove the tags
             self.clear_container(self.tags_container) 
+            #disable the tags button
+            self.master.disable_tags_button()
 
     def change_calendar_theme(self,updated_color):
         self.calendar.config(selectbackground=updated_color)
