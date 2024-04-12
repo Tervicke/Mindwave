@@ -58,19 +58,25 @@ class Sidemenu(tk.Frame):
                 self.editor_widget.configure(state='normal')
                 self.editor_widget.delete('1.0', 'end')
                 self.editor_widget.apply_formatting(json_data['content'])
-                self.editor_widget.config(state='disabled')
+                if datetime.today().strftime("%d/%m/%y") != date:
+                    self.editor_widget.config(state='disabled')
                 #add tags 
                 self.add_tags(json_data['tags'])
         else:
             #remove the content from the editor widget and add No entry found
-            self.editor_widget.configure(state='normal')
-            self.editor_widget.delete('1.0', 'end')
-            self.editor_widget.insert('4.6',"No Entry found..")
-            self.editor_widget.config(state='disabled')
-            #remove the tags
-            self.clear_container(self.tags_container) 
-            #disable the tags button
-            self.master.disable_tags_button()
+            if datetime.today().strftime("%d/%m/%y") != date:
+                self.editor_widget.config(state='disabled')
+                self.editor_widget.configure(state='normal')
+                self.editor_widget.delete('1.0', 'end')
+                self.editor_widget.insert('4.6',"No Entry found..")
+                self.editor_widget.config(state='disabled')
+                #remove the tags
+                self.clear_container(self.tags_container) 
+                #disable the tags button
+                self.master.disable_tags_button()
+            else:
+                #open the default tempate
+                self.editor_widget.set_template()
 
     def change_calendar_theme(self,updated_color):
         self.calendar.config(selectbackground=updated_color)
