@@ -75,7 +75,6 @@ class Menubar(tk.Frame):
             json_data['tags'] = self.side_menu.get_tags()
         #today_date_file = app_settings.Settings['Diary_folder'] + '/' +datetime.now().strftime("%d-%m-%y") + ".json"
         today_date_file= os.path.join(app_settings.Settings['Diary_folder'], datetime.now().strftime("%d-%m-%y") + ".json")
-        print(today_date_file)
         with open(today_date_file, "w") as file:
             file.write(json.dumps(json_data) )
         self.editor_widget.config(state='disabled')
@@ -127,7 +126,6 @@ class Menubar(tk.Frame):
 
     def open_settings(self):
         if self.settings_panel:
-            print(self.settings_panel)
             self.settings_panel.open_setings()
 
     def reset_prompt(self):
