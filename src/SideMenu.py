@@ -155,3 +155,5 @@ class Sidemenu(tk.Frame):
             return self.current_tags
         else:
             return []
+    def remove_tags(self):
+        self.clear_container(self.tags_container) 
