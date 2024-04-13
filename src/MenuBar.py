@@ -77,6 +77,8 @@ class Menubar(tk.Frame):
         today_date_file= os.path.join(app_settings.Settings['Diary_folder'], datetime.now().strftime("%d-%m-%y") + ".json")
         with open(today_date_file, "w") as file:
             file.write(json.dumps(json_data) )
+        #disable tags button
+        self.disable_tags_button()
         self.editor_widget.config(state='disabled')
 
     def open_todays(self):
