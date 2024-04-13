@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import os 
 import glob
+import webbrowser
 class Settingspanel(tk.Toplevel):
     def __init__(self,master=None, **kw):
         super().__init__(master, **kw)
@@ -29,8 +30,13 @@ class Settingspanel(tk.Toplevel):
         self.setup_theme_chooser()
         self.setup_save_button()
         self.setup_template_chooser()
+        self.setup_footer()
         self.center_window_on_screen(self)
 
+        for i in range(self.grid_size()[0]):
+            self.rowconfigure(i, weight=1)
+        for i in range(self.grid_size()[0]):
+            self.columnconfigure(i, weight=1)
     def setup_accent_color(self):
 
         self.accent_label = tk.Label(self, font=app_settings.App_font,text="Accent color:", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
@@ -133,7 +139,6 @@ class Settingspanel(tk.Toplevel):
 
         # Remove the '.md' extension and keep only the base names
         md_filenames = [os.path.splitext(os.path.basename(file))[0] for file in md_files]
-
         # Update self.template_combox['values'] with these filenames
         md_filenames.append("None")
         self.template_combobox['values'] = md_filenames 
@@ -199,3 +204,28 @@ class Settingspanel(tk.Toplevel):
 
         # Set the window position
         window.geometry('+{}+{}'.format(x, y))
+    def setup_footer(self):
+        #self.footer_label.grid(row=5, column=1, pady=5, padx=5)
+        self.footer_text = tk.Text(self, font=app_settings.App_font, bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'], height=1,width=30,highlightthickness=0,relief="flat")
+
+        # Insert text into the Text widget
+        self.footer_text.insert("1.0", "Made with ")
+        self.footer_text.insert("1.10", "\u2665", "red")  # Insert the red heart symbol
+        self.footer_text.insert("1.11", " by ")
+        self.footer_text.insert("1.15", "tervicke", "clickable")  # Insert the clickable word
+        self.footer_text.tag_config("red", foreground="red")  # Configure tag appearance for red color
+        self.footer_text.tag_config("clickable", foreground="blue")
+        self.footer_text.grid(row=5, column=1, pady=5, padx=5)
+        self.footer_text.config(state='disabled')
+        self.footer_text.tag_bind("clickable", "<Button-1>", self.open_link)
+        self.footer_text.tag_bind("clickable", "<Leave>", self.leave_link)
+        self.footer_text.tag_bind("clickable", "<Button-1>", self.open_link)
+    def open_link(self,event):
+        webbrowser.open("https://tervicke.netlify.app/")
+
+    def enter_link(self,event):
+       self.footer_text.config(cursor="hand2")
+
+    def leave_link(self,event):
+       self.footer_text.config(cursor="") 
+
