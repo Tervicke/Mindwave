@@ -13,7 +13,8 @@ class Settingspanel(tk.Toplevel):
         self.resizable(height=False,width=False)
         self.withdraw()
         self.protocol('WM_DELETE_WINDOW',self.close_settings)
-
+        self.configure(borderwidth=2, relief="groove")  # Add border
+    
         self.side_menu = None
         self.style = ttk.Style()
 
