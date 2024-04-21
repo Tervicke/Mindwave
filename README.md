@@ -23,7 +23,6 @@ make
   </tr></table>
 
 ## Known issuses
-- [ ] tags section doesnt change with the change theme 
 - [ ] red accent color isnt fully supported
 
 ## Exploring Features
