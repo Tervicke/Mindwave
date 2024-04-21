@@ -94,6 +94,18 @@ class Sidemenu(tk.Frame):
         self.calendar.config(selectbackground=app_settings.Settings['Theme_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
 
+        #update tags section
+        self.tags_heading_container.config(background=app_settings.Settings['Background_color'])
+        self.tags_heading_container.config(highlightbackground=app_settings.Settings['Background_color'])
+        self.tags_label.config(font=app_settings.App_font)
+        self.tags_label.config(background=app_settings.Settings['Background_color'])
+        self.tags_label.config(foreground=app_settings.Settings['Foreground_color'])
+
+        #loop through the children components of the tags_container and change their background
+        children = self.tags_container.winfo_children()
+        for child in children:
+            child.config(background=app_settings.Settings['Background_color'])
+
     def setup_tags(self):
         self.tags_heading_container = tk.Frame(self)
         self.tags_heading_container.config(background=app_settings.Settings['Background_color'])
@@ -110,7 +122,7 @@ class Sidemenu(tk.Frame):
         self.tags_container.config(background=app_settings.Settings['Background_color'])
         self.tags_container.grid(row=2,column=0,sticky='ew')
         
-
+        
 
     def add_tags(self,tags_list):
         self.current_tags= tags_list
