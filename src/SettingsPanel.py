@@ -43,7 +43,7 @@ class Settingspanel(tk.Toplevel):
         self.accent_label = tk.Label(self, font=app_settings.App_font,text="Accent color:", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
         self.accent_label.grid(row=0,column=0,pady=5,padx=5)
 
-        self.accent_color_combobox = ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Foreground_color'],font=app_settings.App_font,style="Custom.TCombobox")
+        self.accent_color_combobox = ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Combobox_foreground'],font=app_settings.App_font,style="Custom.TCombobox")
         self.accent_color_combobox.grid(row=0, column=1,padx=5,pady=5)
         # Add items to the Combobox
         self.accent_color_combobox['values'] = ("Blue", "Green",  "Red" )
@@ -105,7 +105,7 @@ class Settingspanel(tk.Toplevel):
         self.theme_label.grid(row=1,column=0,pady=5,padx=5)
 
 
-        self.theme_combobox= ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Foreground_color'],font=app_settings.App_font,style="Custom.TCombobox")
+        self.theme_combobox= ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Combobox_foreground'],font=app_settings.App_font,style="Custom.TCombobox")
         self.theme_combobox.grid(row=1, column=1,padx=5,pady=5)
 
 
@@ -127,8 +127,9 @@ class Settingspanel(tk.Toplevel):
 
         self.template_label = tk.Label(self, font=app_settings.App_font,text="Template", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
         self.template_label.grid(row=2,column=0,pady=5,padx=5)
-
-        self.template_combobox = ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Foreground_color'],font=app_settings.App_font,style="Custom.TCombobox")
+        
+        
+        self.template_combobox = ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Combobox_foreground'],font=app_settings.App_font,style="Custom.TCombobox")
         self.template_combobox.grid(row=2, column=1,padx=5,pady=5)
 
         # Construct the pattern to match all '.md' files
@@ -175,17 +176,16 @@ class Settingspanel(tk.Toplevel):
 
         # Update combobox dropdown list styles for both accent and theme comboboxes
         self.style.map('Custom.TCombobox', fieldbackground=[('readonly', app_settings.Settings['Background_color'])])
-        self.accent_color_combobox.configure(foreground=app_settings.Settings['Foreground_color'])
-        self.theme_combobox.configure(foreground=app_settings.Settings['Foreground_color'])
+        self.accent_color_combobox.configure(foreground=app_settings.Settings['Combobox_foreground'])
+        self.theme_combobox.configure(foreground=app_settings.Settings['Combobox_foreground'])
          
         self.accent_color_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
         self.accent_color_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
-        self.accent_color_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])
+        self.accent_color_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Combobox_foreground'])
 
-        self.template_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
         self.template_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
-        self.template_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])
-        self.template_combobox.configure(foreground=app_settings.Settings['Foreground_color'])
+        self.template_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Combobox_foreground'])
+        self.template_combobox.configure(foreground=app_settings.Settings['Combobox_foreground'])
     def open_setings(self):
         self.deiconify()
     def close_settings(self):

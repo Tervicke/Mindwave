@@ -29,6 +29,7 @@ def load_settings():
 
         Settings['Editor_selectbackground']=temp[f"{theme}_Editor_selectbackground"]
         Settings['Editor_highlightbackground']=temp[f"{theme}_Editor_hightlightbackground"]
+        Settings['Combobox_foreground']="#000000"
 def update_settings(setting_key,setting_value):
     global Settings
     with open('src/settings.json', 'r') as file:
