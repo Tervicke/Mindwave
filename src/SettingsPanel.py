@@ -186,6 +186,10 @@ class Settingspanel(tk.Toplevel):
         self.template_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
         self.template_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Combobox_foreground'])
         self.template_combobox.configure(foreground=app_settings.Settings['Combobox_foreground'])
+
+        #update the footer
+        self.footer_text.config(background=app_settings.Settings['Background_color'])
+        self.footer_text.config(foreground=app_settings.Settings['Foreground_color'])
     def open_setings(self):
         self.deiconify()
     def close_settings(self):
