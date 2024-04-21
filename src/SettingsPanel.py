@@ -27,24 +27,32 @@ class Settingspanel(tk.Toplevel):
         self.theme_combobox= None 
         self.accent_color_combobox = None 
 
+        self.current_row= -1;
         self.setup_accent_color()
         self.setup_theme_chooser()
-        self.setup_save_button()
         self.setup_template_chooser()
+
+        #save button 
+        self.setup_save_button()
+
+        #footer
         self.setup_footer()
+
         self.center_window_on_screen(self)
 
         for i in range(self.grid_size()[0]):
             self.rowconfigure(i, weight=1)
         for i in range(self.grid_size()[0]):
             self.columnconfigure(i, weight=1)
+
     def setup_accent_color(self):
+        self.current_row+=1;
 
         self.accent_label = tk.Label(self, font=app_settings.App_font,text="Accent color:", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
-        self.accent_label.grid(row=0,column=0,pady=5,padx=5)
+        self.accent_label.grid(row=self.current_row,column=0,pady=5,padx=5)
 
         self.accent_color_combobox = ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Combobox_foreground'],font=app_settings.App_font,style="Custom.TCombobox")
-        self.accent_color_combobox.grid(row=0, column=1,padx=5,pady=5)
+        self.accent_color_combobox.grid(row=self.current_row, column=1,padx=5,pady=5)
         # Add items to the Combobox
         self.accent_color_combobox['values'] = ("Blue", "Green",  "Red" )
 
@@ -59,6 +67,7 @@ class Settingspanel(tk.Toplevel):
         self.accent_color_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])
 
     def setup_save_button(self):
+        self.current_row+=1
         self.save_button = tk.Button(self, text="save", command=self.apply_changes, bd=1)
         self.save_button.config(relief="solid")
         self.save_button.config(bg=app_settings.Settings['Theme_color'])
@@ -67,7 +76,7 @@ class Settingspanel(tk.Toplevel):
         self.save_button.config(highlightbackground=app_settings.Settings['Background_color'])
         self.save_button.config(activebackground=app_settings.Settings['Theme_color'])
         self.save_button.config(activeforeground="white")
-        self.save_button.grid(row=4, column=1)
+        self.save_button.grid(row=self.current_row, column=1)
 
 
     def apply_changes(self):
@@ -100,13 +109,13 @@ class Settingspanel(tk.Toplevel):
 
     def setup_theme_chooser(self):
 
-
+        self.current_row+=1;
         self.theme_label = tk.Label(self, font=app_settings.App_font,text="Theme:", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
-        self.theme_label.grid(row=1,column=0,pady=5,padx=5)
+        self.theme_label.grid(row=self.current_row,column=0,pady=5,padx=5)
 
 
         self.theme_combobox= ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Combobox_foreground'],font=app_settings.App_font,style="Custom.TCombobox")
-        self.theme_combobox.grid(row=1, column=1,padx=5,pady=5)
+        self.theme_combobox.grid(row=self.current_row, column=1,padx=5,pady=5)
 
 
         # Add items to the Combobox
@@ -124,13 +133,13 @@ class Settingspanel(tk.Toplevel):
 
         #-------------------------------------------------------
     def setup_template_chooser(self):
-
+        self.current_row+=1;
         self.template_label = tk.Label(self, font=app_settings.App_font,text="Template", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
-        self.template_label.grid(row=2,column=0,pady=5,padx=5)
+        self.template_label.grid(row=self.current_row,column=0,pady=5,padx=5)
         
         
         self.template_combobox = ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Combobox_foreground'],font=app_settings.App_font,style="Custom.TCombobox")
-        self.template_combobox.grid(row=2, column=1,padx=5,pady=5)
+        self.template_combobox.grid(row=self.current_row, column=1,padx=5,pady=5)
 
         # Construct the pattern to match all '.md' files
         template = "templates"
@@ -210,6 +219,7 @@ class Settingspanel(tk.Toplevel):
         # Set the window position
         window.geometry('+{}+{}'.format(x, y))
     def setup_footer(self):
+        self.current_row+=1 
         #self.footer_label.grid(row=5, column=1, pady=5, padx=5)
         self.footer_text = tk.Text(self, font=app_settings.App_font, bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'], height=1,width=30,highlightthickness=0,relief="flat")
 
@@ -220,11 +230,12 @@ class Settingspanel(tk.Toplevel):
         self.footer_text.insert("1.15", "tervicke", "clickable")  # Insert the clickable word
         self.footer_text.tag_config("red", foreground="red")  # Configure tag appearance for red color
         self.footer_text.tag_config("clickable", foreground="blue")
-        self.footer_text.grid(row=5, column=1, pady=5, padx=5)
+        self.footer_text.grid(row=self.current_row, column=1, pady=5, padx=5)
         self.footer_text.config(state='disabled')
         self.footer_text.tag_bind("clickable", "<Button-1>", self.open_link)
         self.footer_text.tag_bind("clickable", "<Leave>", self.leave_link)
         self.footer_text.tag_bind("clickable", "<Button-1>", self.open_link)
+
     def open_link(self,event):
         webbrowser.open("https://tervicke.netlify.app/")
 
