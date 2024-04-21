@@ -23,7 +23,6 @@ make
   </tr></table>
 
 ## Known issuses
-- [ ] dropdown in the settings doesnt work correctly in windows
 - [ ] tags section doesnt change with the change theme 
 - [ ] red accent color isnt fully supported
 
