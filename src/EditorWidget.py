@@ -284,7 +284,6 @@ class Editorwidget(tk.Text):
         }
         with open(today_date_file, "w") as file:
             json_data['content']=markdown_content
-            print(json.dumps(json_data))
             file.write(json.dumps(json_data) )
         self.config(state='disabled')
 
