@@ -31,6 +31,7 @@ class Settingspanel(tk.Toplevel):
         self.setup_accent_color()
         self.setup_theme_chooser()
         self.setup_template_chooser()
+        self.setup_font_chooser()
 
         #save button 
         self.setup_save_button()
@@ -88,6 +89,11 @@ class Settingspanel(tk.Toplevel):
             self.change_theme()
         if not self.template_combobox.get() == app_settings.Settings['Template']:
             app_settings.update_settings('Template',self.template_combobox.get())
+        if not self.font_combobox.get() == app_settings.App_font[0]:
+            app_settings.update_font(self.font_combobox.get(),15) #15 is default for now
+            self.master.reload_app()
+    
+
     def change_save_buton_bg(self,update_color):
         self.save_button.config(bg=self.colors[update_color])
         self.save_button.config(activebackground=self.colors[update_color])
@@ -165,7 +171,7 @@ class Settingspanel(tk.Toplevel):
 
     def change_theme(self):
         app_settings.update_settings("Theme",self.theme_combobox.get())
-        self.master.change_themes(self.theme_combobox.get())
+        self.master.reload_app()
 
     def reload(self):
         self.config(bg=app_settings.Settings['Background_color'])
@@ -173,32 +179,49 @@ class Settingspanel(tk.Toplevel):
         self.save_button.config(bg=app_settings.Settings['Theme_color'],
                                  highlightbackground=app_settings.Settings['Background_color'],
                                  activebackground=app_settings.Settings['Theme_color'])
-                 
+        self.save_button.config(font=app_settings.App_font)
+
         self.accent_label.config(bg=app_settings.Settings['Background_color'],
                                   fg=app_settings.Settings['Foreground_color'])
-        
+        self.accent_label.config(font=app_settings.App_font) 
+
         self.theme_label.config(bg=app_settings.Settings['Background_color'],
                                 fg=app_settings.Settings['Foreground_color'])
-        
+        self.theme_label.config(font=app_settings.App_font) 
+
         self.template_label.config(bg=app_settings.Settings['Background_color'],
                                 fg=app_settings.Settings['Foreground_color'])
+        self.template_label.config(font=app_settings.App_font) 
+
+        self.font_label.config(bg=app_settings.Settings['Background_color'],
+                                fg=app_settings.Settings['Foreground_color'])
+        self.font_label.config(font=app_settings.App_font) 
 
         # Update combobox dropdown list styles for both accent and theme comboboxes
         self.style.map('Custom.TCombobox', fieldbackground=[('readonly', app_settings.Settings['Background_color'])])
         self.accent_color_combobox.configure(foreground=app_settings.Settings['Combobox_foreground'])
         self.theme_combobox.configure(foreground=app_settings.Settings['Combobox_foreground'])
+        self.theme_combobox.config(font=app_settings.App_font)
          
         self.accent_color_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
         self.accent_color_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
         self.accent_color_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Combobox_foreground'])
+        self.accent_color_combobox.config(font=app_settings.App_font)
 
         self.template_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
         self.template_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Combobox_foreground'])
         self.template_combobox.configure(foreground=app_settings.Settings['Combobox_foreground'])
+        self.template_combobox.config(font=app_settings.App_font)
+
+        self.font_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
+        self.font_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Combobox_foreground'])
+        self.font_combobox.configure(foreground=app_settings.Settings['Combobox_foreground'])
+        self.font_combobox.config(font=app_settings.App_font)
 
         #update the footer
         self.footer_text.config(background=app_settings.Settings['Background_color'])
         self.footer_text.config(foreground=app_settings.Settings['Foreground_color'])
+        self.footer_text.config(font=app_settings.App_font)
     def open_setings(self):
         self.deiconify()
     def close_settings(self):
@@ -244,4 +267,22 @@ class Settingspanel(tk.Toplevel):
 
     def leave_link(self,event):
        self.footer_text.config(cursor="") 
+    def setup_font_chooser(self):
+        self.current_row+=1;
+        self.font_label = tk.Label(self, font=app_settings.App_font,text="Font:", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
+        self.font_label.grid(row=self.current_row,column=0,pady=5,padx=5)
 
+
+        self.font_combobox= ttk.Combobox(self,state="readonly",background=app_settings.Settings['Background_color'],foreground=app_settings.Settings['Combobox_foreground'],font=app_settings.App_font,style="Custom.TCombobox")
+        self.font_combobox.grid(row=self.current_row, column=1,padx=5,pady=5)
+        
+        self.font_combobox.set(app_settings.App_font[0])
+
+        self.font_combobox['values'] = ("Helvetica", "Courier New",  "Arial" ,"Tahoma" , "Times New Roman" , "DejaVU Sans","Verdana")
+
+        self.style.map('Custom.TCombobox', fieldbackground=[('readonly',app_settings.Settings['Background_color'])])
+        self.style.map('Custom.TCombobox', background=[('readonly', app_settings.Settings['Background_color'])])
+        self.style.map('Custom.TCombobox', foreground=[('readonly', app_settings.Settings['Foreground_color'])])
+        self.font_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
+        self.font_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
+        self.font_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])

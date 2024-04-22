@@ -298,6 +298,7 @@ class Editorwidget(tk.Text):
         self.config(insertbackground=app_settings.Settings['Editor_insertbg'])
         self.config(selectbackground=app_settings.Settings['Editor_selectbackground'])
         self.config(highlightbackground=app_settings.Settings['Editor_highlightbackground'])
+        self.config(font=app_settings.App_font)
     def change_selected_text_color(self,event=None):
             start_index = self.index(tk.SEL_FIRST)
             end_index = self.index(tk.SEL_LAST)

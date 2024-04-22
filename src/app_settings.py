@@ -49,3 +49,14 @@ def update_settings(setting_key,setting_value):
         temp[setting_key] = setting_value
         with open("src/settings.json", 'w') as file:
             json.dump(temp,file,indent=4)
+
+def update_font(font_face,font_size):
+    #update the font in the setting and then load_font again  
+    with open('src/settings.json', 'r') as file:
+        temp = json.load(file)
+        temp["Font"]['font-face'] =  font_face
+        temp["Font"]['font-size'] =  font_size
+        with open("src/settings.json", 'w') as file:
+            json.dump(temp,file,indent=4)
+        load_font(font_face,font_size)
+

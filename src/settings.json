@@ -21,7 +21,7 @@
     "Diary_folder": "journals",
     "Template": "None",
     "Font": {
-        "font-face": "Helvetica",
-        "font-size": "15"
+        "font-face": "Verdana",
+        "font-size": 15
     }
 }

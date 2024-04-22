@@ -93,7 +93,9 @@ class Sidemenu(tk.Frame):
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
         self.calendar.config(selectbackground=app_settings.Settings['Theme_color'])
         self.calendar.config(weekendforeground=app_settings.Settings['Foreground_color'])
-
+        #get the font face and set the size of 10 
+        font_tup = (app_settings.App_font[0],10) 
+        self.calendar.config(font=font_tup)
         #update tags section
         self.tags_heading_container.config(background=app_settings.Settings['Background_color'])
         self.tags_heading_container.config(highlightbackground=app_settings.Settings['Background_color'])

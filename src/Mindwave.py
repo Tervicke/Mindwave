@@ -40,7 +40,7 @@ class MainWindow(tk.Tk):
         #open todays
         self.side_menu.calendar.selection_set(datetime.today())
         self.side_menu.date_selected()
-    def change_themes(self,theme):
+    def reload_app(self):
         app_settings.load_settings()
         self.reload()
         self.editor_widget.reload()
