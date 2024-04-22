@@ -19,5 +19,9 @@
     "Dark_Text_color": "#333333",
     "Theme_color": "#007AFF",
     "Diary_folder": "journals",
-    "Template": "None"
+    "Template": "None",
+		"Font":{
+		 "font-face":"Helvetica",
+		 "font-size":"15"
+		 }		
 }
