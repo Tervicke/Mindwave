@@ -1,6 +1,7 @@
 import json
-App_font = ("Helvetica" , 15)
-Settings= {  }
+#App_font = ("Helvetica",15)
+App_font = ()
+Settings= {}
 #color for blue -> 007AFF
 #color for green -> 34C759
 #color for red -> red
@@ -30,6 +31,16 @@ def load_settings():
         Settings['Editor_selectbackground']=temp[f"{theme}_Editor_selectbackground"]
         Settings['Editor_highlightbackground']=temp[f"{theme}_Editor_hightlightbackground"]
         Settings['Combobox_foreground']="#000000"
+        
+        load_font(temp['Font']['font-face'] , temp['Font']['font-size'])
+
+def load_font(font_face , font_size): #creating a temp font container list and then converting to a tuple at the end
+    global App_font
+    temp_font = []
+    temp_font.append(font_face)
+    temp_font.append(font_size)
+    App_font = tuple(temp_font)
+
 def update_settings(setting_key,setting_value):
     global Settings
     with open('src/settings.json', 'r') as file:
@@ -38,4 +49,3 @@ def update_settings(setting_key,setting_value):
         temp[setting_key] = setting_value
         with open("src/settings.json", 'w') as file:
             json.dump(temp,file,indent=4)
-
