@@ -27,7 +27,7 @@ make
 
 ## Exploring Features
 - [ ] image support
-
+- [ ] better design
 ## Contact
 [my website](https://tervicke.netlify.app/)
 
