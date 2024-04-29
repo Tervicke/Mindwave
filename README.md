@@ -28,6 +28,7 @@ make
 ## Exploring Features
 - [ ] image support
 - [ ] better design
+- [ ] vertical Menu bar
 ## Contact
 [my website](https://tervicke.netlify.app/)
 
