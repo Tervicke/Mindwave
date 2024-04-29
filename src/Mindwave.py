@@ -24,7 +24,7 @@ class MainWindow(tk.Tk):
 
         #placing the widgets 
         self.menu_bar.pack(fill='x',side='top',padx=10)
-        self.editor_widget.pack(fill="both",expand=True , side="left",padx=10,pady=0)
+        self.editor_widget.pack(fill="both",expand=True , side="left",padx=10,pady=(0,10))
         self.side_menu.pack(fill="both",expand=True,padx=10,pady=0)            
 
 
