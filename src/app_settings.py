@@ -30,7 +30,7 @@ def load_settings():
 
         Settings['Editor_selectbackground']=temp[f"{theme}_Editor_selectbackground"]
         Settings['Editor_highlightbackground']=temp[f"{theme}_Editor_hightlightbackground"]
-        Settings['Combobox_foreground']="#000000"
+        Settings['Combobox_foreground'] = temp[f'{theme}_Foreground_color']
         
         load_font(temp['Font']['font-face'] , temp['Font']['font-size'])
 
