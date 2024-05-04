@@ -5,6 +5,7 @@ from EditorWidget import Editorwidget
 import os
 import json
 from datetime import datetime
+from tkinter import ttk
 class Sidemenu(tk.Frame):
     def __init__(self, master=None, **kw):
         super().__init__(master, **kw)
@@ -16,6 +17,8 @@ class Sidemenu(tk.Frame):
         self.setup_tags()
     
     def setup_calendar(self):
+        style = ttk.Style(self.master)
+        style.theme_use('clam')           
         self.calendar.config(selectmode='day')
         self.calendar.config(foreground=app_settings.Settings['Foreground_color'])
         self.calendar.config(background=app_settings.Settings['Text_color'])
@@ -35,7 +38,7 @@ class Sidemenu(tk.Frame):
         #self.calendar.pack(fill="x", pady=10)
         self.calendar.grid(row=0,column=0,pady=10)
         self.calendar.bind("<<CalendarSelected>>", self.date_selected)
-
+        
     def set_editor_widget(self,editor_widget):
         self.editor_widget = editor_widget
 
@@ -179,3 +182,4 @@ class Sidemenu(tk.Frame):
             return []
     def remove_tags(self):
         self.clear_container(self.tags_container) 
+
