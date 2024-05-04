@@ -105,7 +105,7 @@ class Sidemenu(tk.Frame):
         self.tags_label.config(font=app_settings.App_font)
         self.tags_label.config(background=app_settings.Settings['Background_color'])
         self.tags_label.config(foreground=app_settings.Settings['Foreground_color'])
-
+        self.tags_container.config(background=app_settings.Settings['Background_color'])
         #loop through the children components of the tags_container and change their background
         children = self.tags_container.winfo_children()
         for child in children:
