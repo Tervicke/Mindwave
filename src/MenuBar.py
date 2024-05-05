@@ -121,7 +121,10 @@ class Menubar(tk.Frame):
         self.settings_button.config(bg=app_settings.Settings['Background_color'])
         self.settings_button.config(highlightbackground=app_settings.Settings['Background_color'])
         self.settings_button.config(activebackground=app_settings.Settings['Background_color'])
-
+        
+        self.tags_edit_button.config(bg=app_settings.Settings['Background_color'])
+        self.tags_edit_button.config(highlightbackground=app_settings.Settings['Background_color'])
+        self.tags_edit_button.config(activebackground=app_settings.Settings['Background_color'])
 
     def set_settings_panel(self,settings_panel):
         self.settings_panel = settings_panel
