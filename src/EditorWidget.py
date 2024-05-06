@@ -40,7 +40,7 @@ class Editorwidget(tk.Text):
         self.tag_configure("green",foreground="red")
 
         #keyboard bindings 
-        self.bind('<Control-a>', self.select_all_text)
+        #self.bind('<Control-a>', self.select_all_text)
         self.bind("<Control-b>", self.toggle_bold)
         self.bind("<Control-i>", self.toggle_italic)
         self.bind("<Control-u>", self.toggle_underline)
@@ -53,6 +53,7 @@ class Editorwidget(tk.Text):
         #set focus 
         self.focus_set()
 
+    """
     def select_all_text(self, event=None):
         self.tag_remove("sel", "1.0", "end")
         for line in self.get("1.0", "end").split("\n"):
@@ -67,6 +68,7 @@ class Editorwidget(tk.Text):
                 self.tag_add("sel", start_index, end_index)
                 start_index = f"{end_index}+1c"
         return "break"
+    """
 
     def toggle_bold(self,event=None):
         if self.cget('state') == "disabled":
