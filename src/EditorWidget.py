@@ -50,9 +50,6 @@ class Editorwidget(tk.Text):
         #self.bind("<Control-o>", self.open_todays)
 
 
-        #set focus 
-        self.focus_set()
-
     """
     def select_all_text(self, event=None):
         self.tag_remove("sel", "1.0", "end")

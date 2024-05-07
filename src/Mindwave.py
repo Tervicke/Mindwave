@@ -40,6 +40,9 @@ class MainWindow(tk.Tk):
         #open todays
         self.side_menu.calendar.selection_set(datetime.today())
         self.side_menu.date_selected()
+        
+        #set editor focus 
+        self.editor_widget.focus_set()
     def reload_app(self):
         app_settings.load_settings()
         self.reload()
@@ -47,7 +50,7 @@ class MainWindow(tk.Tk):
         self.menu_bar.reload()
         self.side_menu.reload()
         self.setting_panel.reload()
-
+        
     def reload(self):
         self.configure(bg=app_settings.Settings['Background_color'])  
     def disable_tags_button(self):
