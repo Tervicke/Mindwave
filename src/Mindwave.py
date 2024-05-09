@@ -6,6 +6,7 @@ from SideMenu import Sidemenu
 from MenuBar import Menubar
 from SettingsPanel import Settingspanel
 from TagsPanel import Tagspanel
+import sv_ttk
 class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -15,6 +16,7 @@ class MainWindow(tk.Tk):
         self.title('Mindwave')
         self.geometry('1000x620')
         self.iconphoto(False, tk.PhotoImage(file='icons/app_icon.png'))
+
 
         #Editing window
         self.editor_widget = Editorwidget(self)
@@ -26,7 +28,6 @@ class MainWindow(tk.Tk):
         self.menu_bar.pack(fill='x',side='top',padx=10)
         self.editor_widget.pack(fill="both",expand=True , side="left",padx=10,pady=(0,10))
         self.side_menu.pack(fill="both",expand=True,padx=10,pady=0)            
-
 
         #pass the objects menu
         self.menu_bar.set_editor_widget(self.editor_widget)
@@ -40,9 +41,12 @@ class MainWindow(tk.Tk):
         #open todays
         self.side_menu.calendar.selection_set(datetime.today())
         self.side_menu.date_selected()
-        
         #set editor focus 
+
         self.editor_widget.focus_set()
+
+        sv_ttk.set_theme(app_settings.Settings['Theme']) 
+
     def reload_app(self):
         app_settings.load_settings()
         self.reload()
@@ -53,6 +57,9 @@ class MainWindow(tk.Tk):
         
     def reload(self):
         self.configure(bg=app_settings.Settings['Background_color'])  
+        sv_ttk.set_theme(app_settings.Settings['Theme']) 
+
+
     def disable_tags_button(self):
         self.menu_bar.disable_tags_button()
 
