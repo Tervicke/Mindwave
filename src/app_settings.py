@@ -5,7 +5,7 @@ Settings= {}
 #color for blue -> 007AFF
 #color for green -> 34C759
 #color for red -> red
-
+from datetime import datetime , timedelta
 colors = {"Blue":"#007AFF" , "Red":"Red" , "Green":"#34c759"}
 
 def load_settings():
@@ -31,9 +31,29 @@ def load_settings():
         Settings['Editor_selectbackground']=temp[f"{theme}_Editor_selectbackground"]
         Settings['Editor_highlightbackground']=temp[f"{theme}_Editor_hightlightbackground"]
         Settings['Combobox_foreground'] = temp[f'{theme}_Foreground_color']
-        
         load_font(temp['Font']['font-face'] , temp['Font']['font-size'])
+        last_date_recorded = datetime.strptime(temp['Last_date_recorded'], "%Y-%m-%d").date() #change the last recorded date to datetime object
+        today_date = datetime.today().date()
+        if not last_date_recorded == today_date:
+            #do everything if the last recorded date is not today :
 
+            #check if the last recorded date was yesterday
+            yesterday_date = today_date  - timedelta(days=1)  #get todays date
+            current_streak = int(temp['Streaks'])
+            print("current streak" , current_streak)
+            updated_streak = 1 #default is 1
+            if last_date_recorded == yesterday_date:
+                updated_streak = current_streak + 1
+                print("true")
+
+            Settings['Streaks'] = updated_streak 
+            update_settings("Streaks",updated_streak)
+
+            #update last recorded date
+            update_settings("Last_date_recorded",str(datetime.today().date()))
+        else:
+            Settings['Streaks'] = temp['Streaks']
+        print("load_settings")
 def load_font(font_face , font_size): #creating a temp font container list and then converting to a tuple at the end
     global App_font
     temp_font = []

@@ -23,5 +23,7 @@
     "Font": {
         "font-face": "Verdana",
         "font-size": 15
-    }
+    },
+    "Streaks": 2,
+    "Last_date_recorded": "2024-05-10"
 }
