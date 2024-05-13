@@ -31,6 +31,7 @@ def load_settings():
         Settings['Editor_selectbackground']=temp[f"{theme}_Editor_selectbackground"]
         Settings['Editor_highlightbackground']=temp[f"{theme}_Editor_hightlightbackground"]
         Settings['Combobox_foreground'] = temp[f'{theme}_Foreground_color']
+        Settings['Disable_streaks'] = temp['Disable_streaks']
         load_font(temp['Font']['font-face'] , temp['Font']['font-size'])
         last_date_recorded = datetime.strptime(temp['Last_date_recorded'], "%Y-%m-%d").date() #change the last recorded date to datetime object
         today_date = datetime.today().date()
@@ -53,7 +54,6 @@ def load_settings():
             update_settings("Last_date_recorded",str(datetime.today().date()))
         else:
             Settings['Streaks'] = temp['Streaks']
-        print("load_settings")
 def load_font(font_face , font_size): #creating a temp font container list and then converting to a tuple at the end
     global App_font
     temp_font = []

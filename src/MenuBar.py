@@ -45,14 +45,21 @@ class Menubar(tk.Frame):
         self.search_entry = tk.Entry(self)
         self.search_entry.config(font=app_settings.App_font)
         #self.search_entry.pack(side='left',padx=10,pady=10)
-        
+
+        #streaks
         self.fire_icon= tk.PhotoImage(file="icons/fire_icon.png")
         self.fire_icon_label= tk.Label(self ,image=self.fire_icon,bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'])
-        self.fire_icon_label.pack(side='left',padx=(20,0),pady=10)
-
         self.streak_display= tk.Label(self ,text=app_settings.Settings['Streaks'],bg=app_settings.Settings['Background_color'] , bd=0 , highlightbackground=app_settings.Settings['Background_color'],font=app_settings.App_font)
-        self.streak_display.pack(side='left',padx=(3,0),pady=10)
-    
+
+        self.setup_streaks()
+    def setup_streaks(self):
+        if app_settings.Settings['Disable_streaks']  == 'false':
+            self.fire_icon_label.pack(side='left',padx=(20,0),pady=10)
+            self.streak_display.pack(side='left',padx=(3,0),pady=10)
+        else:
+            if self.fire_icon_label:
+                self.fire_icon_label.forget()
+                self.streak_display.forget()
     def setup_label(self):
         self.Datelabel.config(bg=app_settings.Settings['Background_color'])
         self.Datelabel.config(fg=app_settings.Settings['Theme_color'])
@@ -132,9 +139,10 @@ class Menubar(tk.Frame):
         self.tags_edit_button.config(highlightbackground=app_settings.Settings['Background_color'])
         self.tags_edit_button.config(activebackground=app_settings.Settings['Background_color'])
         
-        self.fire_icon_label.config(bg=app_settings.Settings['Background_color'])
-        self.streak_display.config(bg=app_settings.Settings['Background_color'])
-        self.streak_display.config(fg=app_settings.Settings['Foreground_color'])
+        #self.fire_icon_label.config(bg=app_settings.Settings['Background_color'])
+        #self.streak_display.config(bg=app_settings.Settings['Background_color'])
+        #self.streak_display.config(fg=app_settings.Settings['Foreground_color'])
+        self.setup_streaks()
     def set_settings_panel(self,settings_panel):
         self.settings_panel = settings_panel
 

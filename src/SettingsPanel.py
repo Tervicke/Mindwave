@@ -4,6 +4,7 @@ from tkinter import ttk
 import os 
 import glob
 import webbrowser
+import customtkinter
 class Settingspanel(tk.Toplevel):
     def __init__(self,master=None, **kw):
         super().__init__(master, **kw)
@@ -32,7 +33,7 @@ class Settingspanel(tk.Toplevel):
         self.setup_theme_chooser()
         self.setup_template_chooser()
         self.setup_font_chooser()
-
+        self.setup_streak_option()
         #save button 
         self.setup_save_button()
 
@@ -50,7 +51,6 @@ class Settingspanel(tk.Toplevel):
         # Remove unnecessary padding and space between widgets
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
-
     def setup_accent_color(self):
         self.current_row+=1;
 
@@ -227,6 +227,7 @@ class Settingspanel(tk.Toplevel):
         self.footer_text.config(background=app_settings.Settings['Background_color'])
         self.footer_text.config(foreground=app_settings.Settings['Foreground_color'])
         self.footer_text.config(font=app_settings.App_font)
+        self.switch.config(progress_color=(app_settings.Settings['Theme_color'],app_settings.Settings['Theme_color']))
     def open_setings(self):
         self.deiconify()
     def close_settings(self):
@@ -291,3 +292,23 @@ class Settingspanel(tk.Toplevel):
         self.font_combobox.option_add('*TCombobox*Listbox.background', app_settings.Settings['Background_color'])
         self.font_combobox.option_add('*TCombobox*Listbox.font', app_settings.App_font)
         self.font_combobox.option_add('*TCombobox*Listbox.foreground', app_settings.Settings['Foreground_color'])
+    def setup_streak_option(self):
+        self.current_row+=1;
+        self.font_label = tk.Label(self, font=app_settings.App_font,text="Disable streaks", bg=app_settings.Settings['Background_color'], fg=app_settings.Settings['Foreground_color'])
+        self.font_label.grid(row=self.current_row,column=0,pady=(5,0),padx=(5,0),sticky="w")
+        
+
+        self.streaks_switch = customtkinter.CTkSwitch(self, text="",command=self.toggle_streaks,switch_width=50,switch_height=25,progress_color=(app_settings.Settings['Theme_color'],app_settings.Settings['Theme_color']))
+        self.streaks_switch.grid(row=self.current_row, column=1,padx=(5,0),pady=(5,0),sticky='w')
+        #turn on the check if streaks are disabled
+        if app_settings.Settings['Disable_streaks'] == 'true':
+            self.streaks_switch.select()
+
+    def toggle_streaks(self):
+        if app_settings.Settings['Disable_streaks'] == 'false':
+            app_settings.update_settings('Disable_streaks',"true")
+        else:
+            app_settings.update_settings('Disable_streaks',"false")
+        print(app_settings.Settings['Disable_streaks'])
+        self.master.reload_app()
+

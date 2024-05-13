@@ -21,9 +21,10 @@
     "Diary_folder": "journals",
     "Template": "None",
     "Font": {
-        "font-face": "Verdana",
+        "font-face": "Arial",
         "font-size": 15
     },
-    "Streaks": 2,
-    "Last_date_recorded": "2024-05-10"
+    "Streaks": 1,
+    "Last_date_recorded": "2024-05-13",
+    "Disable_streaks": "true"
 }
