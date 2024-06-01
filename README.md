@@ -22,13 +22,6 @@ make
     <td><img  src="screenshots/white_green_linux.jpg" alt="screenshot 4"></td>
   </tr></table>
 
-## Known issuses
-- [ ] red accent color isnt fully supported
-
-## Exploring Features
-- [ ] image support
-- [ ] better design
-- [ ] vertical Menu bar
 ## Contact
 [my website](https://tervicke.netlify.app/)
 
