@@ -1,4 +1,4 @@
 Babel==2.14.0
 pip==22.0.2
-setuptools==59.6.0
+setuptools==70.0.0
 tkcalendar==1.6.1
